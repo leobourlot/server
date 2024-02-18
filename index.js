@@ -1,0 +1,79 @@
+const express = require('express');
+const cors = require('cors');
+var morgan = require('morgan');
+
+// const multer = require('multer');
+
+var fs = require('fs');
+var path = require('path');
+require('dotenv').config();
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('short'));
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
+app.use(cors());
+
+// Configura multer para manejar la carga de imágenes
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//       cb(null, 'ruta/a/tu/carpeta'); // Ruta de la carpeta donde deseas guardar las imágenes
+//     },
+//     filename: (req, file, cb) => {
+//       const extname = path.extname(file.originalname);
+//       const filename = 'imagen_' + Date.now() + extname; // Nombre único basado en la marca de tiempo
+//       cb(null, filename);
+//     },
+//   });
+
+//   const upload = multer({ storage: storage });
+
+app.get('/', (req, res) => {
+    // console.log('hubo get');
+
+    const saludo = 'Hola bienvenido'
+
+    res.status(200).json({ saludo });
+
+})
+const { esAdministrador } = require('./middleware/esAdministrador');
+// const { esJugador } = require('./middleware/esJugador');
+
+// configuracion de passport
+const passport = require("passport");
+require('./config/passport');
+
+app.get('/archivos/:nombreArchivo', (req, res) => {
+    const nombreArchivo = req.params.nombreArchivo;
+    res.sendFile(path.join(__dirname, 'archivos', nombreArchivo));
+});
+
+//rutas de la api
+const v1Publico = require('./v1/rutas/publico');
+const v1Futbolista = require('./v1/rutas/futbolista');
+const v1Convocatoria = require('./v1/rutas/convocatoria');
+const v1Rival = require('./v1/rutas/rival');
+const v1Auth = require('./v1/rutas/auth');
+const v1FutbolistaConvocatoria = require('./v1/rutas/futbolistaConvocatoria');
+
+// const v1Estadistica = require('./v1/rutas/estadistica');
+
+
+//middleware
+app.use('/api/v1/publico', v1Publico);
+app.use('/api/v1/futbolista', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Futbolista);
+app.use('/api/v1/convocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Convocatoria);
+app.use('/api/v1/rival', v1Rival);
+app.use('/api/v1/auth', v1Auth);
+app.use('/api/v1/futbolistaConvocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1FutbolistaConvocatoria);
+
+// app.use('/api/v1/estadistica', [passport.authenticate('jwt', { session: false }), esJugador], v1Estadistica);
+
+
+
+
+
+app.listen(process.env.PUERTO, () => {
+    console.log('API AJPP iniciada');
+})
