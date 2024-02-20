@@ -15,6 +15,8 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(cors());
 
+
+app.use(express.static(path.join(__dirname, 'public_html')));
 // Configura multer para manejar la carga de imágenes
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb) => {
@@ -37,6 +39,11 @@ app.get('/', (req, res) => {
     res.status(200).json({ saludo });
 
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public_html', 'index.html'));
+});
+
 const { esAdministrador } = require('./middleware/esAdministrador');
 // const { esJugador } = require('./middleware/esJugador');
 
