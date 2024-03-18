@@ -4,6 +4,9 @@ require('dotenv').config();
 
 login = async (req, res) => {
     passport.authenticate('local', { session: false }, (err, usuario, info) => {
+        // console.log('req en auth del controlador es: ', req)
+        // console.log('res en auth del controlador es: ', res)
+        // console.log('usuario en controlador auth es: ', usuario)
         if (err || !usuario) {
             return res.status(400).json({estado:'FALLO', msj:info});
         }

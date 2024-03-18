@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const usuarioDB = require('../baseDatos/usuarioBD');
+const registroBD = require('../baseDatos/registroBD');
 
 require('dotenv').config();
 
@@ -14,15 +14,15 @@ const esAdministrador = async (req, res, next) => {
         return res.sendStatus(401); // No autorizado
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, async (err, usuario) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, jugador) => {
         if (err) {
             return res .status(403).send({ status: "Fallo", data: { error: "Token inválido." } }); // Token inválido
         }
 
-        const data = await usuarioDB.buscarPorId(usuario.idUsuario);
+        const data = await registroBD.buscarPorId(jugador.idUsuario);
 
-        // tipoUsuario = 0 presidente | decano
-        // tipoUsuario = 1 entrenador | bedel
+        // tipoUsuario = 0 jugador
+        // tipoUsuario = 1 administrador
         if (data.tipoUsuario != 1) {
             return res.status(403).send({ status: "Fallo", data: { error: "No tiene los privilegios necesarios." } });
         }

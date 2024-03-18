@@ -1,6 +1,6 @@
 const passport = require('passport');
 const passportJWT = require("passport-jwt");
-const usuarioDB = require('./../baseDatos/usuarioBD');
+const registroBD = require('./../baseDatos/registroBD');
 require('dotenv').config();
 
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -9,12 +9,18 @@ const JWTStrategy = passportJWT.Strategy;
 
 //Defino como se validan los usuarios en la estrategia local
 passport.use(new LocalStrategy({
-        usernameField: 'correoElectronico',
+        usernameField: 'dni',
         passwordField: 'clave'
     }, 
-    async (correoElectronico, clave, cb) => {
+    
+    async (dni, clave, cb) => {
+        // console.log('usernameField en passport es: ', usernameField);
+        // console.log('passwordField en passport es: ', passwordField);
+        // console.log('dni en passport es: ', dni);
+        // console.log('clave en passport es: ', clave);
         try {
-            const usuario = await usuarioDB.buscar(correoElectronico, clave); 
+            const usuario = await registroBD.buscar(dni, clave);
+            console.log('usuario en passport es: ', usuario) 
             if (!usuario) {
                 return cb(null, false, { message: 'Nombre de usuario y/o contraseña incorrectos.' });
             } else {
@@ -33,9 +39,9 @@ passport.use(new JWTStrategy({
 }, 
     async (jwtPayload, cb) => {
         console.log(jwtPayload)
-        const usaurio = await usuarioDB.buscarPorId(jwtPayload.idUsuario); 
-        if (usaurio) {
-            return cb(null, usaurio);
+        const usuario = await registroBD.buscarPorId(jwtPayload.idUsuario); 
+        if (usuario) {
+            return cb(null, usuario);
         } else {
             return cb(null, false, { message: 'Token incorrecto.' });
         }

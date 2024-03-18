@@ -7,7 +7,7 @@ y el nombre del archivo
 */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // console.log(file)
+        console.log(file)
         cb(null, 'archivos');
     },
     filename: function (req, file, cb) {  // asignamos el nombre del archivo      

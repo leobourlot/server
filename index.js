@@ -40,11 +40,12 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public_html', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'public_html', 'index.html'));
+// });
 
 const { esAdministrador } = require('./middleware/esAdministrador');
+const { esJugador } = require('./middleware/esJugador');
 // const { esJugador } = require('./middleware/esJugador');
 
 // configuracion de passport
@@ -58,22 +59,25 @@ app.get('/archivos/:nombreArchivo', (req, res) => {
 
 //rutas de la api
 const v1Publico = require('./v1/rutas/publico');
-const v1Futbolista = require('./v1/rutas/futbolista');
-const v1Convocatoria = require('./v1/rutas/convocatoria');
-const v1Rival = require('./v1/rutas/rival');
+// const v1Futbolista = require('./v1/rutas/futbolista');
+const v1Provincia = require('./v1/rutas/provincia');
+const v1Torneo = require('./v1/rutas/torneo');
 const v1Auth = require('./v1/rutas/auth');
-const v1FutbolistaConvocatoria = require('./v1/rutas/futbolistaConvocatoria');
+const v1Registro = require('./v1/rutas/registro');
+const v1JugadorTorneo = require('./v1/rutas/jugadorTorneo');
 
 // const v1Estadistica = require('./v1/rutas/estadistica');
 
 
 //middleware
 app.use('/api/v1/publico', v1Publico);
-app.use('/api/v1/futbolista', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Futbolista);
-app.use('/api/v1/convocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Convocatoria);
-app.use('/api/v1/rival', v1Rival);
+// app.use('/api/v1/futbolista', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Futbolista);
+// app.use('/api/v1/convocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Convocatoria);
+app.use('/api/v1/torneo', v1Torneo) //[passport.authenticate('jwt', { session: false }), esJugador], v1Torneo);
+app.use('/api/v1/provincia', v1Provincia);
 app.use('/api/v1/auth', v1Auth);
-app.use('/api/v1/futbolistaConvocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1FutbolistaConvocatoria);
+app.use('/api/v1/registro', v1Registro);
+app.use('/api/v1/jugadorTorneo', v1JugadorTorneo); //[passport.authenticate('jwt', { session: false }), esAdministrador], v1FutbolistaConvocatoria);
 
 // app.use('/api/v1/estadistica', [passport.authenticate('jwt', { session: false }), esJugador], v1Estadistica);
 
