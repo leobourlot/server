@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { enviarCorreo } = require('../../controladores/publico');
+const { enviarCorreo, enviarCorreoInscripcion } = require('../../controladores/publico');
 const { validarCampos } = require('../../middleware/validarCampos');
 
 const router = Router();
@@ -13,6 +13,8 @@ router.post('/contacto', [
     check('mensaje', 'El mensaje es requerido').not().isEmpty(),
     validarCampos
 ], enviarCorreo);
+
+router.post('/contacto', enviarCorreoInscripcion);
 
 
 

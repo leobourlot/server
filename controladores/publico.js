@@ -58,3 +58,79 @@ exports.enviarCorreo = async (req, res) => {
     })
 }
 
+exports.enviarCorreoInscripcion = async (req, res) => {
+
+    const {nombre1, apellido1, nombre2, apellido2, correoJugador1, correoJugador2} = req.body;
+
+    const plantillaHds2 = fs.readFileSync(path.join(__dirname, '../utiles/handlebars/plantillaInscripcion.hbs'), 'utf8');
+    const correoTemplate = handlebars.compile(plantillaHds2);
+
+    console.log(nombre1);
+    console.log(apellido1);
+    console.log(nombre2);
+    console.log(apellido2);
+    console.log(correoJugador1);
+    console.log(correoJugador2);
+
+    // Datos de la plantilla
+    const datos = {
+        nombre1: nombre1,
+        nombre2: nombre2,
+        apellido1: apellido1,
+        apellido2: apellido2,
+        correoJugador1: correoJugador1,
+        correoJugador2: correoJugador2
+    };
+
+    console.log(datos)
+
+    // Renderizo la plantilla con los datos
+    const correoHtml = correoTemplate(datos);
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.CORREO,
+            pass: process.env.CLAVE
+        }
+    })
+
+    const opcionesJugador1 = {
+        from: 'ajpp',
+        to: correoJugador1,
+        subject: 'Confirmación de inscripción',
+        html: correoHtml
+    }
+    
+    const opcionesJugador2 = {
+        from: 'ajpp',
+        to: correoJugador2,
+        subject: 'Confirmación de inscripción',
+        html: correoHtml
+    }
+
+    transporter.sendMail(opcionesJugador1, (error, info) => {
+        if (error) {
+            console.log('error ->', error);
+            const respuesta = 'correo no enviado';
+            res.json({ respuesta });
+
+        } else {
+            console.log(info);
+            const respuesta = 'correo enviado';
+            res.status(200).json({ respuesta });
+        }
+    })
+    
+    transporter.sendMail(opcionesJugador2, (error, info) => {
+        if (error) {
+            console.log('error ->', error);
+            const respuesta = 'correo no enviado';
+            res.json({ respuesta });
+
+        } else {
+            console.log(info);
+            const respuesta = 'correo enviado';
+            res.status(200).json({ respuesta });
+        }
+    })
+}
