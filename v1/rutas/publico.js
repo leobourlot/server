@@ -14,7 +14,7 @@ router.post('/contacto', [
     validarCampos
 ], enviarCorreo);
 
-router.post('/contacto', enviarCorreoInscripcion);
+router.post('/inscripcion', enviarCorreoInscripcion);
 
 
 

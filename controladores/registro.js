@@ -57,48 +57,6 @@ nuevoJugador = async (req, res) => {
 
 }
 
-// nuevoUsuario = async (req, res) => {
-//     const { dni, apellido, nombre, correoElectronico } = req.body;
-
-//     const dniRegex = /^\d{1,8}$/;
-//     if (!dniRegex.test(dni)) {
-//         console.log('ingrese solo numeros o menos de 9 digitos')
-//         return res.status(400).json({ estado: 'FALLO', msj: 'El DNI debe tener 8 caracteres como máximo y ser solo números' });
-//     }
-
-//     console.log('dni en el controlador es: ', dni)
-//     console.log('apellido en el controlador es: ', apellido)
-//     console.log('nombre en el controlador es: ', nombre)
-//     console.log('correoelectronico en el controlador es: ', correoElectronico)
-
-//     if (!dni || !apellido || !nombre || !correoElectronico) {
-//         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
-//     } else {
-//         // Verificar si ya existe un jugador con el mismo DNI
-//         const jugadorExistente = await registroBD.buscarPorDNI(dni);
-//         if (jugadorExistente) {
-//             return res.status(400).json({ estado: 'FALLO', msj: 'Ya existe un jugador con este DNI' });
-//         }
-
-//         // Si no hay un jugador con el mismo DNI, procedemos a crear el nuevo jugador
-
-//         const jugador = {
-//             dni: dni,
-//             apellido: apellido,
-//             nombre: nombre,
-//             correoElectronico: correoElectronico,
-//         }
-
-//         console.log('jugador antes del await: ', jugador)
-//         try {
-//             const nuevoJugador = await registroBD.nuevo(jugador);
-//             res.status(201).json({ estado: 'OK', msj: 'Jugador creado con éxito', dato: nuevoJugador });
-//         } catch (exec) {
-//             throw exec;
-//         }
-//     }
-// }
-
 module.exports = {
     nuevoJugador,
 

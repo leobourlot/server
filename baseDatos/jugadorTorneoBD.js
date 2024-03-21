@@ -58,7 +58,7 @@ const agregarInscripto = async (inscripcion) => {
 }
 
 const buscarPorJugadorYTorneo = async (idJugador1, idjugador2, idTorneo) => {
-    const consulta = 'SELECT * FROM jugadoresTorneos WHERE jugador1 = ? OR jugador2 = ? AND torneo = ?';
+    const consulta = 'SELECT * FROM jugadoresTorneos WHERE (jugador1 = ? OR jugador2 = ?) AND torneo = ?';
     const [resultado] = await conexion.query(consulta, [idJugador1, idjugador2, idTorneo]);
     return resultado.length > 0; // Devuelve true si el jugador está inscrito en el torneo, false de lo contrario
 }
