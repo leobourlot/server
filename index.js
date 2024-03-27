@@ -73,7 +73,7 @@ const v1JugadorTorneo = require('./v1/rutas/jugadorTorneo');
 app.use('/api/v1/publico', v1Publico);
 // app.use('/api/v1/futbolista', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Futbolista);
 // app.use('/api/v1/convocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Convocatoria);
-app.use('/api/v1/torneo', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Torneo);
+app.use('/api/v1/torneo', v1Torneo); //[passport.authenticate('jwt', { session: false }), esAdministrador], v1Torneo);
 app.use('/api/v1/provincia', v1Provincia);
 app.use('/api/v1/auth', v1Auth);
 app.use('/api/v1/registro', v1Registro);
