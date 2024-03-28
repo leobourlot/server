@@ -1,21 +1,33 @@
 const multer = require('multer');
 
-/*
-configuracion multer.
-le indicamos donde guardamos los archivos
-y el nombre del archivo
-*/
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        console.log(file)
-        cb(null, 'archivos');
-    },
-    filename: function (req, file, cb) {  // asignamos el nombre del archivo      
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + '-' + file.originalname);
-    }
-})
-
 const upload = multer({ storage: storage });
 
 exports.upload = upload.single('foto');
+
+// Ruta para cambiar la imagen del próximo torneo
+exports.cambiarImagenTorneo = (req, res) => {
+    const fotoProximoTorneo = req.file;
+
+    if (!fotoProximoTorneo) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    // Ruta donde se guarda la imagen del próximo torneo
+    const rutaImagenTorneo = path.join(__dirname, 'archivos', 'imagenTorneo.png');
+
+    try {
+        // Verifica si ya existe una imagen del próximo torneo
+        if (fs.existsSync(rutaImagenTorneo)) {
+            // Si existe, elimina la imagen anterior
+            fs.unlinkSync(rutaImagenTorneo);
+        }
+
+        // Guarda la nueva imagen con el mismo nombre de archivo fijo
+        fs.renameSync(fotoProximoTorneo.path, rutaImagenTorneo);
+
+        res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
+    } catch (error) {
+        console.error('Error al actualizar la imagen del próximo torneo:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del próximo torneo.' });
+    }
+};

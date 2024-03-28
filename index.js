@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 var morgan = require('morgan');
 
-// const multer = require('multer');
+const multer = require('multer');
 
 var fs = require('fs');
 var path = require('path');
@@ -65,6 +65,7 @@ const v1Torneo = require('./v1/rutas/torneo');
 const v1Auth = require('./v1/rutas/auth');
 const v1Registro = require('./v1/rutas/registro');
 const v1JugadorTorneo = require('./v1/rutas/jugadorTorneo');
+const v1Archivos = require('./v1/rutas/archivos');
 
 // const v1Estadistica = require('./v1/rutas/estadistica');
 
@@ -77,6 +78,7 @@ app.use('/api/v1/torneo', v1Torneo); //[passport.authenticate('jwt', { session: 
 app.use('/api/v1/provincia', v1Provincia);
 app.use('/api/v1/auth', v1Auth);
 app.use('/api/v1/registro', v1Registro);
+app.use('/api/v1/archivo', v1Archivos);
 app.use('/api/v1/jugadorTorneo', v1JugadorTorneo); //[passport.authenticate('jwt', { session: false }), esAdministrador], v1FutbolistaConvocatoria);
 
 // app.use('/api/v1/estadistica', [passport.authenticate('jwt', { session: false }), esJugador], v1Estadistica);
