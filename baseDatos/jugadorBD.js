@@ -18,7 +18,6 @@ const buscarTodos = async () =>{
 
     // Ejecuto la consulta
     const [jugadores] = await conexion.query(consulta);
-    console.log('consulta en bd es: ', jugadores)
 
     return jugadores
 

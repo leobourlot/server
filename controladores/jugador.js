@@ -39,7 +39,6 @@ buscarTodos = async (req, res) => {
 
 
         const jugadores = await jugadorBD.buscarTodos({ firstName, lastName }, pLimit, pOffset, pOrder, pAsc);
-        console.log('jugadores en controlador es: ', jugadores)
 
         res.json({ estado: 'OK', dato: jugadores });
 
