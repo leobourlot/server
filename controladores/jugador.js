@@ -39,6 +39,7 @@ buscarTodos = async (req, res) => {
 
 
         const jugadores = await jugadorBD.buscarTodos({ firstName, lastName }, pLimit, pOffset, pOrder, pAsc);
+        console.log('jugadores en controlador es: ', jugadores)
 
         res.json({ estado: 'OK', dato: jugadores });
 
@@ -49,6 +50,7 @@ buscarTodos = async (req, res) => {
 
 eliminar = async (req, res) => {
     const idJugador = req.params.idJugador;
+    console.log('idJugador es: ', idJugador)
 
     if (!idJugador) {
         res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });;
@@ -63,29 +65,36 @@ eliminar = async (req, res) => {
 
 }
 
-actualizar = async (req, res) => {
-    const idJugador = req.params.idJugador;
-    const { dni, apellido, nombre, fechaNac, correoElectronico, telefono, localidad } = req.body;
-    
-    const jugador = {
-        ...(dni && { dni }),
-        ...(apellido && { apellido }),
-        ...(nombre && { nombre }),
-        ...(fechaNac && { fechaNac }),
-        ...(correoElectronico && { correoElectronico }),
-        ...(telefono && { telefono }),
-        ...(localidad && { localidad }),
-    };
+modificar = async (req, res) => {
+    const { idJugador, dni, apellido, nombre, fechaNac, correoElectronico, telefono, localidad } = req.body;
+    console.log('idJugador en modificar antes de la modificacion es: ', idJugador)
+    console.log('dni en modificar antes de la modificacion es: ', dni)
+    console.log('apellido en modificar antes de la modificacion es: ', apellido)
+    console.log('nombre en modificar antes de la modificacion es: ', nombre)
+    console.log('correoElectronico en modificar antes de la modificacion es: ', correoElectronico)
+    console.log('telefono en modificar antes de la modificacion es: ', telefono)
+    console.log('localidad en modificar antes de la modificacion es: ', localidad)
 
-    try {
-        const jugadorActualizado = await jugadorBD.update(jugador, idJugador)
-        res.status(201).json({ estado: 'OK', msj: 'Jugador modificado con éxito', dato: jugadorActualizado })
+    if (!idJugador) {
+        res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
+    } else {
+        const dato = {
+            idJugador: idJugador,
+            dni: dni,
+            apellido: apellido,
+            nombre: nombre,
+            fechaNac: fechaNac,
+            correoElectronico: correoElectronico,
+            telefono: telefono,
+            localidad: localidad
+        }
 
-    } catch (exec) {
-        res.status(500).json({ estado: 'FALLA', msj: 'Error' });
+        const jugadorModificado = await jugadorBD.modificar(dato, idJugador);
+        console.log('jugadorModificado es: ', jugadorModificado)
+        res.status(200).json({ estado: 'OK', msj: 'Jugador modificado', dato: jugadorModificado });
     }
 }
 
 module.exports = {
-    buscarPorId, buscarTodos, eliminar, actualizar
+    buscarPorId, buscarTodos, eliminar, modificar
 }

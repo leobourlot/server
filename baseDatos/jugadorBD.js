@@ -18,6 +18,7 @@ const buscarTodos = async () =>{
 
     // Ejecuto la consulta
     const [jugadores] = await conexion.query(consulta);
+    console.log('consulta en bd es: ', jugadores)
 
     return jugadores
 
@@ -28,7 +29,7 @@ const eliminar = async(idJugador) =>{
     await conexion.query(consulta, [idJugador]);
 }
 
-const update = async(jugador, idJugador)=>{
+const modificar = async(jugador, idJugador)=>{
     
     const consulta = `UPDATE jugadores SET ? WHERE idJugador = ?`;
     const [jugadorActualizado] = await conexion.query(consulta, [jugador, idJugador]);
@@ -36,4 +37,4 @@ const update = async(jugador, idJugador)=>{
     return buscarPorId(jugadorActualizado.insertId);
 }
 
-module.exports = {buscarPorId, buscarTodos, eliminar, update}
+module.exports = {buscarPorId, buscarTodos, eliminar, modificar}
