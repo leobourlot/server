@@ -59,7 +59,7 @@ app.get('/archivos/:nombreArchivo', (req, res) => {
 
 //rutas de la api
 const v1Publico = require('./v1/rutas/publico');
-// const v1Futbolista = require('./v1/rutas/futbolista');
+const v1Jugador = require('./v1/rutas/jugador');
 const v1Provincia = require('./v1/rutas/provincia');
 const v1Torneo = require('./v1/rutas/torneo');
 const v1Auth = require('./v1/rutas/auth');
@@ -71,7 +71,7 @@ const v1JugadorTorneo = require('./v1/rutas/jugadorTorneo');
 
 //middleware
 app.use('/api/v1/publico', v1Publico);
-// app.use('/api/v1/futbolista', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Futbolista);
+app.use('/api/v1/jugador', v1Jugador);
 // app.use('/api/v1/convocatoria', [passport.authenticate('jwt', { session: false }), esAdministrador], v1Convocatoria);
 app.use('/api/v1/torneo', v1Torneo); //[passport.authenticate('jwt', { session: false }), esAdministrador], v1Torneo);
 app.use('/api/v1/provincia', v1Provincia);
