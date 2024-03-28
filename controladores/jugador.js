@@ -48,7 +48,7 @@ buscarTodos = async (req, res) => {
 }
 
 eliminar = async (req, res) => {
-    const idJugador = req.params.idJugador;
+    const idJugador = req.body;
     console.log('idJugador es: ', idJugador)
 
     if (!idJugador) {
