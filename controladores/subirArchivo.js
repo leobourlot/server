@@ -17,6 +17,8 @@ exports.upload = upload.single('foto');
 exports.cambiarImagenTorneo = (req, res) => {
     const fotoProximoTorneo = req.file;
 
+    console.log('fotoProximoTorneo en el controlador es: ', fotoProximoTorneo)
+
     if (!fotoProximoTorneo) {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
