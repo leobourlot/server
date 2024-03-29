@@ -27,7 +27,7 @@ exports.cambiarImagenTorneo = (req, res) => {
     }
 
     // Ruta donde se guarda la imagen del próximo torneo
-    const rutaImagenTorneo = path.join(__dirname, 'archivos', 'imagenTorneo.png');
+    const rutaImagenTorneo = path.join(__dirname, '..', 'archivos', 'imagenTorneo.png');
 
     try {
         // Verifica si ya existe una imagen del próximo torneo
