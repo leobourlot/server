@@ -1,5 +1,14 @@
 const multer = require('multer');
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'archivos'); // Ruta de la carpeta donde deseas guardar las imágenes
+    },
+    filename: function (req, file, cb) {
+        cb(null, 'proximoTorneo.png'); // Establece el nombre del archivo como "proximoTorneo.png"
+    }
+});
+
 const upload = multer({ storage: storage });
 
 exports.upload = upload.single('foto');
