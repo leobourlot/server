@@ -37,9 +37,14 @@ exports.cambiarImagenTorneo = (req, res) => {
         }
 
         // Guarda la nueva imagen con el mismo nombre de archivo fijo
+        try{
         fs.renameSync(fotoProximoTorneo.path, rutaImagenTorneo);
+        
 
         res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
     } catch (error) {
         console.error('Error al actualizar la imagen del próximo torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del próximo torneo.' });
