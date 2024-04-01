@@ -87,6 +87,6 @@ app.use('/api/v1/jugadorTorneo', v1JugadorTorneo); //[passport.authenticate('jwt
 
 
 
-app.listen(0, () => {
+app.listen(process.env.PUERTO || 3005, () => {
     console.log('API AJPP iniciada');
 })
