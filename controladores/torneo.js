@@ -101,23 +101,14 @@ modificar = async (req, res) => {
 }
 
 cerrarInscripcion = async (req, res) => {
-    const { idTorneo, fechaInicio, fechaFinal, ciudad, provincia, activo } = req.body;
+    const { idTorneo, activo } = req.body;
     console.log('idTorneo en cerrar antes de la modificacion es: ', idTorneo)
-    console.log('fechaInicio en cerrar antes de la modificacion es: ', fechaInicio)
-    console.log('fechaFinal en cerrar antes de la modificacion es: ', fechaFinal)
-    console.log('ciudad en cerrar antes de la modificacion es: ', ciudad)
-    console.log('provincia en cerrar antes de la modificacion es: ', provincia)
     console.log('activo en cerrar antes de la modificacion es: ', activo)
 
     if (!idTorneo || activo === undefined) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {
         const dato = {
-            idTorneo: idTorneo,
-            fechaInicio: fechaInicio,
-            fechaFinal: fechaFinal,
-            ciudad: ciudad,
-            provincia: provincia,
             activo: activo
         }
 
