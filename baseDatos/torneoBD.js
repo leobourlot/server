@@ -49,6 +49,19 @@ const modificar = async (dato, idTorneo) => {
     }
 }
 
+const cerrarInscripcion = async (dato, idTorneo) => {
+    try {
+        console.log('Datos recibidos para cerrar inscripcion:', dato);
+        const consulta = 'UPDATE torneos SET ? WHERE idTorneo = ?';
+
+        const [result] = await conexion.query(consulta, [dato, idTorneo]);
+
+        return buscarPorId(idTorneo)
+    } catch (error) {
+        console.error('Error al modificar el torneo: ', error)
+    }
+}
+
 
 
 const eliminar = async (idTorneo) => {
@@ -68,4 +81,5 @@ module.exports = {
     nuevo,
     modificar,
     eliminar,
+    cerrarInscripcion
 }
