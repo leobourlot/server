@@ -66,6 +66,7 @@ const v1Auth = require('./v1/rutas/auth');
 const v1Registro = require('./v1/rutas/registro');
 const v1JugadorTorneo = require('./v1/rutas/jugadorTorneo');
 const v1Archivos = require('./v1/rutas/archivos');
+const v1Noticia = require('./v1/rutas/noticia');
 
 // const v1Estadistica = require('./v1/rutas/estadistica');
 
@@ -79,6 +80,7 @@ app.use('/api/v1/provincia', v1Provincia);
 app.use('/api/v1/auth', v1Auth);
 app.use('/api/v1/registro', v1Registro);
 app.use('/api/v1/archivo', v1Archivos);
+app.use('/api/v1/noticia', v1Noticia);
 app.use('/api/v1/jugadorTorneo', v1JugadorTorneo); //[passport.authenticate('jwt', { session: false }), esAdministrador], v1FutbolistaConvocatoria);
 
 // app.use('/api/v1/estadistica', [passport.authenticate('jwt', { session: false }), esJugador], v1Estadistica);
@@ -87,6 +89,6 @@ app.use('/api/v1/jugadorTorneo', v1JugadorTorneo); //[passport.authenticate('jwt
 
 
 
-app.listen(8080, () => {
+app.listen(3005, () => {
     console.log('API AJPP iniciada');
 })

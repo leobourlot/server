@@ -9,7 +9,7 @@ buscarTodos = async (req, res) => {
             // torneo.provincia = provinciaTorneo ? provinciaTorneo.nombreProvincia : ''; // Asigna el nombre de la provincia al torneo
             return torneo;
         }));
-        console.log('torneosConProvincias en el controlador es: ', torneosConProvincias)
+        // console.log('torneosConProvincias en el controlador es: ', torneosConProvincias)
         res.status(200).json({ estado: 'OK', dato: torneosConProvincias });
     } catch (exec) {
         throw (exec);
