@@ -2,7 +2,7 @@ const conexion = require('./conexionBD');
 
 const buscarPorId = async (idNoticia) => {
 
-    const consulta = `SELECT  idNoticia, titulo, descripcion, urlImagen, descripcionImagen, fecha, contenido FROM noticias WHERE idNoticia = ?`;
+    const consulta = `SELECT  idNoticia, titulo, descripcion, urlImagen, descripcionImagen, fecha, contenido, imagenes, descripcionesImagenes, contenidos FROM noticias WHERE idNoticia = ?`;
 
     const [noticia] = await conexion.query(consulta,[idNoticia]);    
 
@@ -12,7 +12,7 @@ const buscarPorId = async (idNoticia) => {
 
 const buscarTodos = async () => {
     
-    const consulta = `SELECT idNoticia, titulo, descripcion, urlImagen, descripcionImagen, fecha, contenido FROM noticias ORDER BY fecha DESC`;
+    const consulta = `SELECT idNoticia, titulo, descripcion, urlImagen, descripcionImagen, fecha, contenido, imagenes, descripcionesImagenes, contenidos FROM noticias ORDER BY fecha DESC`;
 
     const [noticias] = await conexion.query(consulta);    
 
