@@ -27,7 +27,7 @@ const buscarPaginadas = async (pagina, limite) => {
 
     const offset = (pagina - 1) * limite;
 
-    const consulta = `SELECT idNoticia, titulo, descripcion, fecha, urlImagen, imagenes, descripcionesImagenes, contenidos FROM noticias ORDER BY fecha DESC LIMIT ? OFFSET ?`;
+    const consulta = `SELECT idNoticia, titulo, descripcion, fecha, imagenes, descripcionesImagenes, contenidos FROM noticias ORDER BY fecha DESC LIMIT ? OFFSET ?`;
 
     const [noticias] = await conexion.query(consulta, [limite, offset]);    
 
