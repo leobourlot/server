@@ -48,7 +48,7 @@ buscarPaginadas = async (req, res) => {
 
 nueva = async (req, res) => {
 
-    const { titulo, descripcion, imagenes, descripcionesImagenes, contenidos } = req.body;
+    const { titulo, descripcion, imagenes, descripcionesImagenes, contenidos, creador } = req.body;
 
     // console.log('req.body es: ', req.body)
     // console.log('idNoticia en el controlador es: ', idNoticia)
@@ -58,7 +58,7 @@ nueva = async (req, res) => {
     // console.log('descripcionImagen en el controlador es: ', descripcionesImagenes)
     // console.log('contenido en el controlador es: ', contenidos)
 
-    if (!titulo || !descripcion || !imagenes || !descripcionesImagenes || !contenidos) {
+    if (!titulo || !descripcion || !imagenes || !descripcionesImagenes || !contenidos || !creador) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {
 
@@ -68,6 +68,7 @@ nueva = async (req, res) => {
             imagenes: JSON.stringify(imagenes),
             descripcionesImagenes: JSON.stringify(descripcionesImagenes),
             contenidos: JSON.stringify(contenidos),
+            creador: creador
         }
 
         try {
@@ -81,7 +82,7 @@ nueva = async (req, res) => {
 }
 
 modificar = async (req, res) => {
-    const { titulo, descripcion, imagenes, descripcionesImagenes, contenidos } = req.body;
+    const { titulo, descripcion, imagenes, descripcionesImagenes, contenidos, creador } = req.body;
     const idNoticia = req.params.idNoticia
     // console.log('req.body es: ', req.body)
     // console.log('idNoticia en el controlador es: ', idNoticia)
@@ -91,7 +92,7 @@ modificar = async (req, res) => {
     // console.log('descripcionImagen en el controlador es: ', descripcionImagen)
     // console.log('contenido en el controlador es: ', contenido)
 
-    if (!idNoticia || !titulo || !descripcion || !imagenes || !descripcionesImagenes || !contenidos) {
+    if (!idNoticia || !titulo || !descripcion || !imagenes || !descripcionesImagenes || !contenidos || !creador) {
 
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {
@@ -102,6 +103,7 @@ modificar = async (req, res) => {
             imagenes: JSON.stringify(imagenes),
             descripcionesImagenes: JSON.stringify(descripcionesImagenes),
             contenidos: JSON.stringify(contenidos),
+            creador: creador
         }
 
         const noticiaModificada = await noticiaBD.modificar(dato, idNoticia);
