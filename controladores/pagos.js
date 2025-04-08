@@ -69,6 +69,7 @@ const crearOrden = async (req, res) => {
         // res.json({ message: "Payment creted" });
         res.json(resultado);
     } catch (error) {
+        console.log('El error en la rpeferencia es: ', error)
         return res.status(500).json({ message: "Something goes wrong" });
     }
 };
