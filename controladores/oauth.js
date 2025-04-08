@@ -24,49 +24,53 @@ const code_challenge_method = 'S256'; // O "Plain" si se desea
 
 
 const iniciarOAuth = async (req, res) => {
+    try {
+        const idOrganizador = req.params.idOrganizador;
+        console.log('organizadorId en iniciar es: ', idOrganizador)
+        if (idOrganizador) {
+            req.session.idOrganizador = idOrganizador;
+        }
 
-    const idOrganizador = req.params.idOrganizador;
-    console.log ('organizadorId en iniciar es: ', idOrganizador)
-    if(idOrganizador) {
-        req.session.idOrganizador = idOrganizador;
+        const code_verifier = generateCodeVerifier();
+
+        const code_challenge = generateCodeChallenge(code_verifier);
+        // Genera un identificador único para state
+        const state = crypto.randomBytes(16).toString('hex');
+        // req.session.code_verifier = code_verifier;
+        // Guarda el state también si lo necesitas para verificarlo luego
+        // req.session.oauthState = state;
+
+        await organizadorBD.guardarOAuthData(idOrganizador, { state, code_verifier });
+
+        // Puedes guardar este state en la sesión o en la base de datos para verificarlo luego
+        // req.session.oauthState = state; // ejemplo con sesión
+        // const hash = crypto.createHash('sha256').update(code_verifier).digest();
+        // const code_challenge = hash.toString('base64')
+        //     .replace(/=/g, '')
+        //     .replace(/\+/g, '-')
+        //     .replace(/\//g, '_');
+
+
+        const client_id = process.env.CLIENT_ID;  // Reemplaza con tu client_id
+        const redirect_uri = process.env.REDIRECT_URI; // Debe coincidir con lo registrado en Mercado Pago
+
+        console.log('state al iniciar es: ', state)
+        console.log('code verifier al iniciar es: ', code_verifier)
+        console.log('client_id al iniciar es: ', client_id)
+        console.log('redirect_uri al iniciar es: ', redirect_uri)
+
+        // Construcción de la URL de autorización
+
+        const authorizationUrl = `https://auth.mercadopago.com/authorization?response_type=code&client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}`;
+
+        // Redirige al usuario a la URL de Mercado Pago
+        console.log(authorizationUrl)
+        // return res.redirect(authorizationUrl);
+        return res.status(200).json({ authorizationUrl });
+    } catch (error) {
+        console.log('El error en oauth es: ', error)
+
     }
-
-    const code_verifier = generateCodeVerifier();
-
-    const code_challenge = generateCodeChallenge(code_verifier);
-    // Genera un identificador único para state
-    const state = crypto.randomBytes(16).toString('hex');
-    // req.session.code_verifier = code_verifier;
-    // Guarda el state también si lo necesitas para verificarlo luego
-    // req.session.oauthState = state;
-
-    await organizadorBD.guardarOAuthData(idOrganizador, { state, code_verifier });
-
-    // Puedes guardar este state en la sesión o en la base de datos para verificarlo luego
-    // req.session.oauthState = state; // ejemplo con sesión
-    // const hash = crypto.createHash('sha256').update(code_verifier).digest();
-    // const code_challenge = hash.toString('base64')
-    //     .replace(/=/g, '')
-    //     .replace(/\+/g, '-')
-    //     .replace(/\//g, '_');
-
-
-    const client_id = process.env.CLIENT_ID;  // Reemplaza con tu client_id
-    const redirect_uri = process.env.REDIRECT_URI; // Debe coincidir con lo registrado en Mercado Pago
-
-    console.log('state al iniciar es: ', state)
-    console.log('code verifier al iniciar es: ', code_verifier)
-    console.log('client_id al iniciar es: ', client_id)
-    console.log('redirect_uri al iniciar es: ', redirect_uri)
-
-    // Construcción de la URL de autorización
-    
-    const authorizationUrl = `https://auth.mercadopago.com/authorization?response_type=code&client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}`;
-
-    // Redirige al usuario a la URL de Mercado Pago
-    console.log(authorizationUrl)
-    // return res.redirect(authorizationUrl);
-    return res.status(200).json({ authorizationUrl });
 
     // await res.redirect(authorizationUrl);
 };
@@ -92,7 +96,7 @@ const callback = async (req, res) => {
     // console.log('storedState es: ', storedState)
     console.log('codeVerifier es: ', oauthCodeVerifier)
     console.log('idOrganizador es: ', idOrganizador)
-    
+
     // if (state !== storedState) {
     //     return res.status(400).send("Error: El estado no coincide, posible ataque CSRF");
     // }
