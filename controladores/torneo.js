@@ -44,7 +44,7 @@ nuevo = async (req, res) => {
         filename = 'default.jpg';
     } else {
         filename = req.file.filename;
-        console.log('filename en crear es: ', filename)
+        // console.log('filename en crear es: ', filename)
     }
 
     // console.log('fechaInicio en el controlador es: ', fechaInicio)
@@ -77,12 +77,12 @@ nuevo = async (req, res) => {
 
 modificar = async (req, res) => {
     const { idTorneo, fechaInicio, fechaFinal, ciudad, provincia, costoInscripcion } = req.body;
-    console.log('idTorneo en modificar antes de la modificacion es: ', idTorneo)
-    console.log('fechaInicio en modificar antes de la modificacion es: ', fechaInicio)
-    console.log('fechaFinal en modificar antes de la modificacion es: ', fechaFinal)
-    console.log('ciudad en modificar antes de la modificacion es: ', ciudad)
-    console.log('provincia en modificar antes de la modificacion es: ', provincia)
-    console.log('provincia en modificar antes de la modificacion es: ', provincia)
+    // console.log('idTorneo en modificar antes de la modificacion es: ', idTorneo)
+    // console.log('fechaInicio en modificar antes de la modificacion es: ', fechaInicio)
+    // console.log('fechaFinal en modificar antes de la modificacion es: ', fechaFinal)
+    // console.log('ciudad en modificar antes de la modificacion es: ', ciudad)
+    // console.log('provincia en modificar antes de la modificacion es: ', provincia)
+    // console.log('provincia en modificar antes de la modificacion es: ', provincia)
 
     if (!idTorneo) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
@@ -97,15 +97,15 @@ modificar = async (req, res) => {
         }
 
         const torneoModificado = await torneoBD.modificar(dato, idTorneo);
-        console.log('torneoModificado es: ', torneoModificado)
+        // console.log('torneoModificado es: ', torneoModificado)
         res.status(200).json({ estado: 'OK', msj: 'Torneo modificado', dato: torneoModificado });
     }
 }
 
 cerrarInscripcion = async (req, res) => {
     const { idTorneo, activo } = req.body;
-    console.log('idTorneo en cerrar antes de la modificacion es: ', idTorneo)
-    console.log('activo en cerrar antes de la modificacion es: ', activo)
+    // console.log('idTorneo en cerrar antes de la modificacion es: ', idTorneo)
+    // console.log('activo en cerrar antes de la modificacion es: ', activo)
 
     if (!idTorneo || activo === undefined) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
@@ -115,7 +115,7 @@ cerrarInscripcion = async (req, res) => {
         }
 
         const torneoInscripcionCerrada = await torneoBD.cerrarInscripcion(dato, idTorneo);
-        console.log('torneoInscripcionCerrada es: ', torneoInscripcionCerrada)
+        // console.log('torneoInscripcionCerrada es: ', torneoInscripcionCerrada)
         res.status(200).json({ estado: 'OK', msj: 'Torneo modificado', dato: torneoInscripcionCerrada });
     }
 }
@@ -124,7 +124,7 @@ cerrarInscripcion = async (req, res) => {
 
 eliminar = async (req, res) => {
     const idTorneo = req.params.idTorneo;
-    console.log('idTorneo en eliminar del controlador es: ', idTorneo)
+    // console.log('idTorneo en eliminar del controlador es: ', idTorneo)
 
     if (!idTorneo) {
         res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });;

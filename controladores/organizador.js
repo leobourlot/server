@@ -53,10 +53,10 @@ nuevo = async (req, res) => {
 
 modificar = async (req, res) => {
     const { idOrganizador, apellido, ciudad, club } = req.body;
-    console.log('idOrganizador en modificar antes de la modificacion es: ', idOrganizador)
-    console.log('apellido en modificar antes de la modificacion es: ', apellido)
-    console.log('ciudad en modificar antes de la modificacion es: ', ciudad)
-    console.log('club en modificar antes de la modificacion es: ', club)
+    // console.log('idOrganizador en modificar antes de la modificacion es: ', idOrganizador)
+    // console.log('apellido en modificar antes de la modificacion es: ', apellido)
+    // console.log('ciudad en modificar antes de la modificacion es: ', ciudad)
+    // console.log('club en modificar antes de la modificacion es: ', club)
 
     if (!idOrganizador) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
@@ -69,14 +69,14 @@ modificar = async (req, res) => {
         }
 
         const organizadorModificado = await organizadorBD.modificar(dato, idOrganizador);
-        console.log('organizadorModificado es: ', organizadorModificado)
+        // console.log('organizadorModificado es: ', organizadorModificado)
         res.status(200).json({ estado: 'OK', msj: 'Organizador modificado', dato: organizadorModificado });
     }
 }
 
 eliminar = async (req, res) => {
     const idOrganizador = req.params.idOrganizador;
-    console.log('idOrganizador en eliminar del controlador es: ', idOrganizador)
+    // console.log('idOrganizador en eliminar del controlador es: ', idOrganizador)
 
     if (!idOrganizador) {
         res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });;

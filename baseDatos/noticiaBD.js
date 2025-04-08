@@ -6,7 +6,7 @@ const buscarPorId = async (idNoticia) => {
 
     const [noticia] = await conexion.query(consulta,[idNoticia]);
     
-    console.log('noticia en bd es: ', noticia)
+    // console.log('noticia en bd es: ', noticia)
 
     return noticia;
 }
@@ -46,7 +46,7 @@ const nueva = async (noticia) => {
 
 const modificar = async (dato, idNoticia) => {
     try {
-        console.log('Datos recibidos para modificar:', dato);
+        // console.log('Datos recibidos para modificar:', dato);
         const consulta = 'UPDATE noticias SET ? WHERE idNoticia = ?';
 
         const [result] = await conexion.query(consulta, [dato, idNoticia]);

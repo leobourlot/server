@@ -69,10 +69,10 @@ const nuevoJugador = async (jugador) => {
 }
 
 const buscarPorDNI = async (dni) => {
-    console.log('dni en registroBD es: ', dni)
+    // console.log('dni en registroBD es: ', dni)
     const consulta = `SELECT * FROM jugadores WHERE dni = ?`;
     const [jugador] = await conexion.query(consulta, dni);
-    console.log('jugador en registroBd buscarPorDni es: ', jugador)
+    // console.log('jugador en registroBd buscarPorDni es: ', jugador)
     return jugador[0]; // Devuelve el primer jugador encontrado o undefined si no hay ninguno
 }
 

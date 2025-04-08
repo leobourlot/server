@@ -27,7 +27,7 @@ const estadistica = async () => {
         delanteros: delanteros,
     }
 
-    console.log('datos estadistica es: ', datos);
+    // console.log('datos estadistica es: ', datos);
 
     return datos;
 }

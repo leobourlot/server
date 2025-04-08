@@ -11,7 +11,7 @@ buscarPorId = async (req, res) => {
 
         const noticia = await noticiaBD.buscarPorId(idNoticia);
 
-        console.log('noticia en controlador es :', noticia)
+        // console.log('noticia en controlador es :', noticia)
 
         res.json({ estado: 'OK', dato: noticia })
         // console.log('provincia en el controlador es: ', provincia);
@@ -107,7 +107,7 @@ modificar = async (req, res) => {
         }
 
         const noticiaModificada = await noticiaBD.modificar(dato, idNoticia);
-        console.log('noticiaModificada es: ', noticiaModificada)
+        // console.log('noticiaModificada es: ', noticiaModificada)
         res.status(200).json({ estado: 'OK', msj: 'Noticia modificada', dato: noticiaModificada });
     }
 }

@@ -20,7 +20,7 @@ passport.use(new LocalStrategy({
         // console.log('clave en passport es: ', clave);
         try {
             const usuario = await registroBD.buscar(dni, clave);
-            console.log('usuario en passport es: ', usuario) 
+            // console.log('usuario en passport es: ', usuario) 
             if (!usuario) {
                 return cb(null, false, { message: 'Nombre de usuario y/o contraseña incorrectos.' });
             } else {
@@ -38,7 +38,7 @@ passport.use(new JWTStrategy({
     secretOrKey: process.env.JWT_SECRET 
 }, 
     async (jwtPayload, cb) => {
-        console.log(jwtPayload)
+        // console.log(jwtPayload)
         const usuario = await registroBD.buscarPorId(jwtPayload.idUsuario); 
         if (usuario) {
             return cb(null, usuario);

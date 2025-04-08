@@ -45,7 +45,7 @@ const buscarCosto = async () => {
     const [resultados] = await conexion.query(consulta);
 
     if (resultados.length > 0) {
-        console.log('Costo obtenido de BD:', resultados[0].costoInscripcion);
+        // console.log('Costo obtenido de BD:', resultados[0].costoInscripcion);
         return resultados[0].costoInscripcion;
     } else {
         throw new Error("No se encontró el costo de inscripción");
@@ -59,9 +59,9 @@ const agregarInscripto = async (inscripcion) => {
         const consulta = 'INSERT INTO jugadoresTorneos SET ?';
         const [jugadorTorneoNuevo] = await conexion.query(consulta, inscripcion);
 
-        console.log('inscripcion en bd es: ', inscripcion);
+        // console.log('inscripcion en bd es: ', inscripcion);
         const resultado = await buscarPorId(jugadorTorneoNuevo.insertId);
-        console.log('buscarPorID en bd es:', resultado);
+        // console.log('buscarPorID en bd es:', resultado);
 
         return resultado;
     } catch (error) {
@@ -77,7 +77,7 @@ const buscarPorJugadorYTorneo = async (idJugador1, idjugador2, idTorneo) => {
 }
 
 const buscarMisInscriptos = async (idJugador) => {
-    console.log('idJugador en BD es: ', idJugador)
+    // console.log('idJugador en BD es: ', idJugador)
     const consulta = `SELECT torneos.* FROM torneos 
                     INNER JOIN jugadoresTorneos ON torneos.idTorneo = jugadoresTorneos.torneo 
                     WHERE jugadoresTorneos.jugador1 = ? OR jugadoresTorneos.jugador2 = ?`;
@@ -86,7 +86,7 @@ const buscarMisInscriptos = async (idJugador) => {
 }
 
 const eliminar = async (idJugadorTorneo) => {
-    console.log('idJugadorTorneo en eliminar de bd es: ', idJugadorTorneo)
+    // console.log('idJugadorTorneo en eliminar de bd es: ', idJugadorTorneo)
     try {
 
         const consulta = 'DELETE FROM jugadoresTorneos WHERE jugadoresTorneos.idJugadoresTorneos = ?';

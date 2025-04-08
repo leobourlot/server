@@ -10,14 +10,14 @@ nuevoJugador = async (req, res) => {
         return res.status(400).json({ estado: 'FALLO', msj: 'El DNI debe tener 8 caracteres como máximo y ser solo números' });
     }
 
-    console.log('dni en el controlador es: ', dni)
-    console.log('apellido en el controlador es: ', apellido)
-    console.log('nombre en el controlador es: ', nombre)
-    console.log('fechaNac en el controlador es: ', fechaNac)
-    console.log('correoelectronico en el controlador es: ', correoElectronico)
-    console.log('telefono en el controlador es: ', telefono)
-    console.log('localidad en el controlador es: ', localidad)
-    console.log('clave en el controlador es: ', clave)
+    // console.log('dni en el controlador es: ', dni)
+    // console.log('apellido en el controlador es: ', apellido)
+    // console.log('nombre en el controlador es: ', nombre)
+    // console.log('fechaNac en el controlador es: ', fechaNac)
+    // console.log('correoelectronico en el controlador es: ', correoElectronico)
+    // console.log('telefono en el controlador es: ', telefono)
+    // console.log('localidad en el controlador es: ', localidad)
+    // console.log('clave en el controlador es: ', clave)
 
 
 
@@ -45,7 +45,7 @@ nuevoJugador = async (req, res) => {
             clave: clave,
         }
 
-        console.log('jugador antes del await: ', jugador)
+        // console.log('jugador antes del await: ', jugador)
         try {
             const nuevoJugador = await registroBD.nuevoJugador(jugador);
             // const nuevoUsuario = await registroBD.nuevoUsuario(jugador);

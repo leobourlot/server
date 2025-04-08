@@ -7,7 +7,7 @@ const esJugador = async (req, res, next) => {
 
 
     const authHeader = req.headers['authorization'];
-    console.log('ESTE ES EL TOKEN' + authHeader);
+    // console.log('ESTE ES EL TOKEN' + authHeader);
     const token = authHeader && authHeader.split(' ')[1]; // El token es enviado utilizando "Bearer"
 
     if (!token) {

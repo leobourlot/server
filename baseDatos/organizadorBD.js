@@ -38,7 +38,7 @@ const nuevo = async (organizador) => {
 
 const modificar = async (dato, idOrganizador) => {
     try {
-        console.log('Datos recibidos para modificar:', dato);
+        // console.log('Datos recibidos para modificar:', dato);
         const consulta = 'UPDATE organizadores SET ? WHERE idOrganizador = ?';
 
         const [result] = await conexion.query(consulta, [dato, idOrganizador]);
@@ -67,7 +67,7 @@ const actualizarToken = async (idOrganizador, tokenData) => {
 };
 
 const eliminar = async (idOrganizador) => {
-    console.log('idOrganizador en eliminar de bd es: ', idOrganizador)
+    // console.log('idOrganizador en eliminar de bd es: ', idOrganizador)
     try {
 
         const consulta = 'DELETE FROM organizadores WHERE organizadores.idOrganizador = ?';

@@ -49,7 +49,7 @@ buscarTodos = async (req, res) => {
 
 eliminar = async (req, res) => {
     const idJugador = req.params.idJugador;
-    console.log('idJugador es: ', idJugador)
+    // console.log('idJugador es: ', idJugador)
 
     if (!idJugador) {
         res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });;
@@ -66,13 +66,13 @@ eliminar = async (req, res) => {
 
 modificar = async (req, res) => {
     const { idJugador, dni, apellido, nombre, fechaNac, correoElectronico, telefono, localidad } = req.body;
-    console.log('idJugador en modificar antes de la modificacion es: ', idJugador)
-    console.log('dni en modificar antes de la modificacion es: ', dni)
-    console.log('apellido en modificar antes de la modificacion es: ', apellido)
-    console.log('nombre en modificar antes de la modificacion es: ', nombre)
-    console.log('correoElectronico en modificar antes de la modificacion es: ', correoElectronico)
-    console.log('telefono en modificar antes de la modificacion es: ', telefono)
-    console.log('localidad en modificar antes de la modificacion es: ', localidad)
+    // console.log('idJugador en modificar antes de la modificacion es: ', idJugador)
+    // console.log('dni en modificar antes de la modificacion es: ', dni)
+    // console.log('apellido en modificar antes de la modificacion es: ', apellido)
+    // console.log('nombre en modificar antes de la modificacion es: ', nombre)
+    // console.log('correoElectronico en modificar antes de la modificacion es: ', correoElectronico)
+    // console.log('telefono en modificar antes de la modificacion es: ', telefono)
+    // console.log('localidad en modificar antes de la modificacion es: ', localidad)
 
     if (!idJugador) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
@@ -89,7 +89,7 @@ modificar = async (req, res) => {
         }
 
         const jugadorModificado = await jugadorBD.modificar(dato, idJugador);
-        console.log('jugadorModificado es: ', jugadorModificado)
+        // console.log('jugadorModificado es: ', jugadorModificado)
         res.status(200).json({ estado: 'OK', msj: 'Jugador modificado', dato: jugadorModificado });
     }
 }

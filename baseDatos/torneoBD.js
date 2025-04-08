@@ -38,7 +38,7 @@ const nuevo = async (torneo) => {
 
 const modificar = async (dato, idTorneo) => {
     try {
-        console.log('Datos recibidos para modificar:', dato);
+        // console.log('Datos recibidos para modificar:', dato);
         const consulta = 'UPDATE torneos SET ? WHERE idTorneo = ?';
 
         const [result] = await conexion.query(consulta, [dato, idTorneo]);
@@ -51,7 +51,7 @@ const modificar = async (dato, idTorneo) => {
 
 const cerrarInscripcion = async (dato, idTorneo) => {
     try {
-        console.log('Datos recibidos para cerrar inscripcion:', dato);
+        // console.log('Datos recibidos para cerrar inscripcion:', dato);
         const consulta = 'UPDATE torneos SET ? WHERE idTorneo = ?';
 
         const [result] = await conexion.query(consulta, [dato, idTorneo]);
@@ -65,7 +65,7 @@ const cerrarInscripcion = async (dato, idTorneo) => {
 
 
 const eliminar = async (idTorneo) => {
-    console.log('idTorneo en eliminar de bd es: ', idTorneo)
+    // console.log('idTorneo en eliminar de bd es: ', idTorneo)
     try {
         
         const consulta = 'DELETE FROM torneos WHERE torneos.idTorneo = ?';

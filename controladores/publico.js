@@ -10,11 +10,11 @@ exports.enviarCorreo = async (req, res) => {
     const plantillaHds2 = fs.readFileSync(path.join(__dirname, '../utiles/handlebars/plantilla.hbs'), 'utf8');
     const correoTemplate = handlebars.compile(plantillaHds2);
 
-    console.log(nombre);
-    console.log(apellido);
-    console.log(email);
-    console.log(telefono);
-    console.log(mensaje);
+    // console.log(nombre);
+    // console.log(apellido);
+    // console.log(email);
+    // console.log(telefono);
+    // console.log(mensaje);
 
     // Datos de la plantilla
     const datos = {
@@ -65,12 +65,12 @@ exports.enviarCorreoInscripcion = async (req, res) => {
     const plantillaHds2 = fs.readFileSync(path.join(__dirname, '../utiles/handlebars/plantillaInscripcion.hbs'), 'utf8');
     const correoTemplate = handlebars.compile(plantillaHds2);
 
-    console.log(nombre1);
-    console.log(apellido1);
-    console.log(nombre2);
-    console.log(apellido2);
-    console.log(correoJugador1);
-    console.log(correoJugador2);
+    // console.log(nombre1);
+    // console.log(apellido1);
+    // console.log(nombre2);
+    // console.log(apellido2);
+    // console.log(correoJugador1);
+    // console.log(correoJugador2);
 
     // Datos de la plantilla
     const datos = {
@@ -82,7 +82,7 @@ exports.enviarCorreoInscripcion = async (req, res) => {
         correoJugador2: correoJugador2
     };
 
-    console.log(datos)
+    // console.log(datos)
 
     // Renderizo la plantilla con los datos
     const correoHtml = correoTemplate(datos);
