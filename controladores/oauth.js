@@ -51,11 +51,13 @@ const iniciarOAuth = async (req, res) => {
     //     .replace(/\//g, '_');
 
 
-    const client_id = process.env.client_id;  // Reemplaza con tu client_id
-    const redirect_uri = process.env.redirect_uri; // Debe coincidir con lo registrado en Mercado Pago
+    const client_id = process.env.CLIENT_ID;  // Reemplaza con tu client_id
+    const redirect_uri = process.env.REDIRECT_URI; // Debe coincidir con lo registrado en Mercado Pago
 
     console.log('state al iniciar es: ', state)
     console.log('code verifier al iniciar es: ', code_verifier)
+    console.log('client_id al iniciar es: ', client_id)
+    console.log('redirect_uri al iniciar es: ', redirect_uri)
 
     // Construcción de la URL de autorización
     
