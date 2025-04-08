@@ -4,7 +4,7 @@ const registroBD = require('../baseDatos/registroBD');
 buscarPorId = async (req, res) => {
     try {
         const idTorneo = req.params.idTorneo;
-        console.log('idTorneo en el controlador es: ', idTorneo)
+        // console.log('idTorneo en el controlador es: ', idTorneo)
 
         if (!idTorneo) {
             res.status(404).json({ estado: 'FALLO', msj: 'Falta el id' });
@@ -42,16 +42,26 @@ buscarTodas = async (req, res) => {
     }
 }
 
+buscarCosto = async (req, res) => {
+    try {
+        const costoInscripcion = await jugadorTorneoBD.buscarCosto();
+        console.log('costoInscripcion en el controlador es: ', costoInscripcion)
+        res.status(200).json({ estdo: 'OK', dato: costoInscripcion });
+    } catch (exec) {
+        throw (exec);
+    }
+}
+
 inscripcion = async (req, res) => {
 
     try {
         const { idTorneo, idJugador1, idJugador2 } = req.body;
 
         console.log('idTorneo en el controlador es: ', idTorneo)
-        console.log('idJugador1 en el controlador es: ', idJugador1)
-        console.log('idJugador2 en el controlador es: ', idJugador2)
+        // console.log('idJugador1 en el controlador es: ', idJugador1)
+        // console.log('idJugador2 en el controlador es: ', idJugador2)
 
-        const idTorneoInt = +idTorneo
+        const idTorneoInt = +idTorneo.idTorneo
 
         console.log('idTorneoInt es: ', idTorneoInt)
 
@@ -72,6 +82,8 @@ inscripcion = async (req, res) => {
         }
 
         const jugadorInscripto = { jugador1: parseInt(idJugador1), jugador2: parseInt(idJugador2), torneo: idTorneoInt, activo: true };
+
+        console.log('jugadorInscripto en el controlador es: ', jugadorInscripto)
         const jugadorTorneoNuevo = await jugadorTorneoBD.agregarInscripto(jugadorInscripto);
 
         console.log('jugadorTorneoNuevo en el controlador es: ', jugadorTorneoNuevo)
@@ -125,5 +137,5 @@ eliminar = async (req, res) => {
 }
 
 module.exports = {
-    buscarPorId, inscripcion, buscarTodas, buscarPorDni, eliminar, buscarMisInscriptos
+    buscarPorId, inscripcion, buscarTodas, buscarPorDni, eliminar, buscarMisInscriptos, buscarCosto
 }

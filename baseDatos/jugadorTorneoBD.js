@@ -23,7 +23,7 @@ const buscarInscriptos = async (idTorneo) => {
         INNER JOIN jugadores AS j1 ON jt.jugador1 = j1.idJugador
         INNER JOIN jugadores AS j2 ON jt.jugador2 = j2.idJugador
         WHERE jt.torneo = ?`;
-        
+
     const [jugadoresInscritos] = await conexion.query(consulta, idTorneo);
 
     return jugadoresInscritos;
@@ -39,6 +39,19 @@ const buscarTodas = async () => {
 
     return jugadorTorneos;
 }
+
+const buscarCosto = async () => {
+    const consulta = `SELECT costoInscripcion FROM costos`;
+    const [resultados] = await conexion.query(consulta);
+
+    if (resultados.length > 0) {
+        console.log('Costo obtenido de BD:', resultados[0].costoInscripcion);
+        return resultados[0].costoInscripcion;
+    } else {
+        throw new Error("No se encontró el costo de inscripción");
+    }
+}
+
 
 const agregarInscripto = async (inscripcion) => {
 
@@ -75,7 +88,7 @@ const buscarMisInscriptos = async (idJugador) => {
 const eliminar = async (idJugadorTorneo) => {
     console.log('idJugadorTorneo en eliminar de bd es: ', idJugadorTorneo)
     try {
-        
+
         const consulta = 'DELETE FROM jugadoresTorneos WHERE jugadoresTorneos.idJugadoresTorneos = ?';
         await conexion.query(consulta, [idJugadorTorneo]);
     } catch (error) {
@@ -90,5 +103,6 @@ module.exports = {
     buscarPorJugadorYTorneo,
     buscarInscriptos,
     eliminar,
-    buscarMisInscriptos
+    buscarMisInscriptos,
+    buscarCosto
 }

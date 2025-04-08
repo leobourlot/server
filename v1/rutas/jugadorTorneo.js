@@ -1,6 +1,6 @@
 const { Router } = require ('express');
 
-const { buscarPorId, buscarTodas, inscripcion, buscarPorDni, eliminar, buscarMisInscriptos } = require ('../../controladores/jugadorTorneo');
+const { buscarPorId, buscarTodas, inscripcion, buscarPorDni, eliminar, buscarMisInscriptos, buscarCosto } = require ('../../controladores/jugadorTorneo');
 
 const router = Router();
 
@@ -10,6 +10,9 @@ router.get('/jugadorTorneo/:idTorneo', buscarPorId); //http://localhost:3005/api
 
 //buscar todo
 router.get('/jugadorTorneo', buscarTodas);
+
+//buscar costo
+router.get('/costo', buscarCosto);
 
 //buscar misInscriptos
 router.get('/misInscriptos/:idJugador', buscarMisInscriptos);

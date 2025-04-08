@@ -5,7 +5,7 @@ const handlebars = require('handlebars');
 
 exports.enviarCorreo = async (req, res) => {
 
-    const {nombre, apellido, email, telefono, mensaje} = req.body;
+    const { nombre, apellido, email, telefono, mensaje } = req.body;
 
     const plantillaHds2 = fs.readFileSync(path.join(__dirname, '../utiles/handlebars/plantilla.hbs'), 'utf8');
     const correoTemplate = handlebars.compile(plantillaHds2);
@@ -60,7 +60,7 @@ exports.enviarCorreo = async (req, res) => {
 
 exports.enviarCorreoInscripcion = async (req, res) => {
 
-    const {nombre1, apellido1, nombre2, apellido2, correoJugador1, correoJugador2} = req.body;
+    const { nombre1, apellido1, nombre2, apellido2, correoJugador1, correoJugador2 } = req.body;
 
     const plantillaHds2 = fs.readFileSync(path.join(__dirname, '../utiles/handlebars/plantillaInscripcion.hbs'), 'utf8');
     const correoTemplate = handlebars.compile(plantillaHds2);
@@ -100,7 +100,7 @@ exports.enviarCorreoInscripcion = async (req, res) => {
         subject: 'Confirmación de inscripción',
         html: correoHtml
     }
-    
+
     const opcionesJugador2 = {
         from: 'ajpp',
         to: correoJugador2,
@@ -108,29 +108,44 @@ exports.enviarCorreoInscripcion = async (req, res) => {
         html: correoHtml
     }
 
-    transporter.sendMail(opcionesJugador1, (error, info) => {
-        if (error) {
-            console.log('error ->', error);
-            const respuesta = 'correo no enviado';
-            res.json({ respuesta });
+    try {
+        // Enviar ambos correos simultáneamente y esperar a que ambos terminen
+        await Promise.all([
+            transporter.sendMail(opcionesJugador1),            
+            transporter.sendMail(opcionesJugador2)
+        ]);
 
-        } else {
-            console.log(info);
-            const respuesta = 'correo enviado';
-            res.status(200).json({ respuesta });
-        }
-    })
-    
-    transporter.sendMail(opcionesJugador2, (error, info) => {
-        if (error) {
-            console.log('error ->', error);
-            const respuesta = 'correo no enviado';
-            res.json({ respuesta });
+        console.log('correos enviados')
+        // Una única respuesta después de enviar ambos correos
+        res.status(200).json({ respuesta: 'correo enviado' });
+    } catch (error) {
+        console.error('Error enviando correos:', error);
+        res.status(500).json({ respuesta: 'correo no enviado' });
+    }
+    // transporter.sendMail(opcionesJugador1, (error, info) => {
+    //     if (error) {
+    //         console.log('error ->', error);
+    //         console.log('error en enviar a jugador1')
+    //         const respuesta = 'correo no enviado';
+    //         res.json({ respuesta });
 
-        } else {
-            console.log(info);
-            const respuesta = 'correo enviado';
-            res.status(200).json({ respuesta });
-        }
-    })
+    //     } else {
+    //         console.log(info);
+    //         const respuesta = 'correo enviado';
+    //         res.status(200).json({ respuesta });
+    //     }
+    // })
+
+    // transporter.sendMail(opcionesJugador2, (error, info) => {
+    //     if (error) {
+    //         console.log('error ->', error);
+    //         const respuesta = 'correo no enviado';
+    //         res.json({ respuesta });
+
+    //     } else {
+    //         console.log(info);
+    //         const respuesta = 'correo enviado';
+    //         res.status(200).json({ respuesta });
+    //     }
+    // })
 }
