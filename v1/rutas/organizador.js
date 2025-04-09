@@ -10,7 +10,7 @@ router.put('/modificar/:idOrganizador', modificar);
 
 router.get('/organizadores', buscarTodos);
 
-router.get('/organizadores/:idOrganizador', buscarPorId);
+router.get('/:idOrganizador', buscarPorId);
 
 router.delete('/eliminar/:idOrganizador', eliminar);
 
