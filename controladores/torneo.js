@@ -37,7 +37,7 @@ buscarPorId = async (req, res) => {
 
 nuevo = async (req, res) => {
 
-    const { fechaInicio, fechaFinal, ciudad, provincia, costoInscripcion } = req.body;
+    const { fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion } = req.body;
 
     let filename;
     if (!req.file) {
@@ -52,9 +52,10 @@ nuevo = async (req, res) => {
     // console.log('ciudad en el controlador es: ', ciudad)
     // console.log('provincia en el controlador es: ', provincia)
 
-    if (!fechaInicio || !fechaFinal || !ciudad || !provincia || !costoInscripcion) {
+    if (!fechaInicio || !fechaFinal || !ciudad || !provincia || !organizador || !costoInscripcion) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {
+        const organizadorInt = +organizador
         // console.log(provincia)
         const torneo = {
             foto: filename,
@@ -62,7 +63,8 @@ nuevo = async (req, res) => {
             fechaFinal: fechaFinal,
             ciudad: ciudad,
             provincia: provincia,
-            costoInscripcion: costoInscripcion
+            costoInscripcion: costoInscripcion,
+            idOrganizador: organizadorInt
         }
 
         try {
@@ -76,7 +78,7 @@ nuevo = async (req, res) => {
 }
 
 modificar = async (req, res) => {
-    const { idTorneo, fechaInicio, fechaFinal, ciudad, provincia, costoInscripcion } = req.body;
+    const { idTorneo, fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion } = req.body;
     // console.log('idTorneo en modificar antes de la modificacion es: ', idTorneo)
     // console.log('fechaInicio en modificar antes de la modificacion es: ', fechaInicio)
     // console.log('fechaFinal en modificar antes de la modificacion es: ', fechaFinal)
@@ -87,12 +89,15 @@ modificar = async (req, res) => {
     if (!idTorneo) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {
+
+        const organizadorInt = +organizador
         const dato = {
             idTorneo: idTorneo,
             fechaInicio: fechaInicio,
             fechaFinal: fechaFinal,
             ciudad: ciudad,
             provincia: provincia,
+            idOrganizador: organizadorInt,
             costoInscripcion: costoInscripcion
         }
 
