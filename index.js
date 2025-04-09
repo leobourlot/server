@@ -137,7 +137,7 @@ io.on('connection', (socket) => {
 });
 
 app.set('socketio', io);
-server.listen(3005, '0.0.0.0', () => {
+server.listen(8080, '0.0.0.0', () => {
     console.log('API AJPP iniciada con Socket.IO');
 });
 
