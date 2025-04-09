@@ -3,12 +3,12 @@ const organizadorBD = require('../baseDatos/organizadorBD');
 buscarTodos = async (req, res) => {
     try {
         const organizadores = await organizadorBD.buscarTodos();
-        
+
         res.status(200).json({ estado: 'OK', dato: organizadores });
     } catch (exec) {
         throw (exec);
     }
-    
+
 }
 
 buscarPorId = async (req, res) => {
@@ -20,8 +20,9 @@ buscarPorId = async (req, res) => {
             const organizador = await organizadorBD.buscarPorId(idOrganizador);
             // console.log('torneo en la respuesta para la tabla es: ', torneo)
             res.status(200).json({ estado: 'OK', dato: organizador });
-        } catch (exec) {
-            throw (exec);
+        } catch (error) {
+            console.error('Error en buscarPorId:', error);
+            res.status(500).json({ estado: 'FALLO', msj: 'Error al obtener el organizador' });
         }
     }
 
@@ -30,7 +31,7 @@ buscarPorId = async (req, res) => {
 nuevo = async (req, res) => {
 
     const { apellido, ciudad, club } = req.body;
-    
+
     if (!apellido || !ciudad || !club) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {

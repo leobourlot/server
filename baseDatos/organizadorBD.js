@@ -4,7 +4,7 @@ const buscarPorId = async (idOrganizador) => {
 
     const consulta = `SELECT * FROM organizadores WHERE idOrganizador = ?`;
 
-    const [organizador] = await conexion.query(consulta, idOrganizador);
+    const [organizador] = await conexion.query(consulta, [idOrganizador]);
 
     return organizador;
 }
