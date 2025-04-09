@@ -105,9 +105,9 @@ const callback = async (req, res) => {
     console.log('Autorizacion exitosa')
 
     // Variables de configuración (idealmente desde variables de entorno)
-    const client_id = process.env.client_id;
-    const client_secret = process.env.client_secret;
-    const redirect_uri = process.env.redirect_uri;
+    const client_id = process.env.CLIENT_ID;
+    const client_secret = process.env.CLIENT_SECRET;
+    const redirect_uri = process.env.REDIRECT_URI;
 
     console.log('clientId es: ', client_id)
     console.log('clientSecret es: ', client_secret)
