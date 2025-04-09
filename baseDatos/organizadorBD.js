@@ -105,6 +105,24 @@ const obtenerOAuthDataPorState = async (state) => {
     }
 };
 
+const obtenerToken = async (idOrganizador) => {
+    try {
+        const consulta = `SELECT access_token FROM organizadores WHERE idOrganizador = ?`;
+        const [resultado] = await conexion.query(consulta, [idOrganizador]);
+
+        // Verificamos si se encontró el organizador
+        if (resultado.length === 0) {
+            throw new Error('Organizador no encontrado');
+        }
+
+        // Retornamos solo el token
+        return resultado[0].access_token;
+    } catch (error) {
+        console.error('Error al obtener el token del organizador:', error);
+        throw error;
+    }
+};
+
 module.exports = {
     buscarPorId,
     buscarTodos,
@@ -113,5 +131,6 @@ module.exports = {
     eliminar,
     actualizarToken,
     guardarOAuthData,
-    obtenerOAuthDataPorState
+    obtenerOAuthDataPorState,
+    obtenerToken
 }

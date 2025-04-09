@@ -3,15 +3,17 @@ require('dotenv').config(); // Asegúrate de cargar las variables de entorno
 // const { MERCADOPAGO_API_KEY } = require("../config.js");
 const jugadorTorneoBD = require('../baseDatos/jugadorTorneoBD')
 const torneoBD = require('../baseDatos/torneoBD')
+const { obtenerToken } = require('../baseDatos/organizadorBD');
 
+// const vendedorToken = await obtenerToken(idOrganizador);
 
-const client = new MercadoPagoConfig({
-    accessToken: process.env.MERCADOPAGO_API_KEY,
-    options: { timeout: 5000 }
-})
+// const client = new MercadoPagoConfig({
+//     accessToken: vendedorToken,
+//     options: { timeout: 5000 }
+// })
 
-const preferenceApi = new Preference(client)
-const paymentApi = new Payment(client)
+// const preferenceApi = new Preference(client)
+// const paymentApi = new Payment(client)
 
 
 
@@ -19,10 +21,20 @@ const crearOrden = async (req, res) => {
 
     try {
         // console.log('Antes de resultado: ')
-        const { idTorneo } = req.body;
-        if (!idTorneo) {
+        const { idTorneo, idOrganizador } = req.body;
+        if (!idTorneo || !idOrganizador) {
             return res.status(400).json({ message: "Falta el ID del torneo" });
         }
+
+        const vendedorToken = await obtenerToken(idOrganizador); // 👈 ahora sí, dentro de función async
+
+        const client = new MercadoPagoConfig({
+            accessToken: vendedorToken,
+            options: { timeout: 5000 }
+        });
+
+        const preferenceApi = new Preference(client)
+        const paymentApi = new Payment(client)
 
         const torneo = await torneoBD.buscarPorId(idTorneo);
         if (!torneo) {
@@ -34,7 +46,7 @@ const crearOrden = async (req, res) => {
         const precio = parseInt(torneo[0].costoInscripcion);
 
         console.log('precio en el controlador es: ', precio)
-        
+
         const resultado = await preferenceApi.create({
             body: {
                 items: [
@@ -52,8 +64,8 @@ const crearOrden = async (req, res) => {
 
                 back_urls: {
                     success: `${process.env.BASE_URL}/api/v1/pagos/success`,
-                //     pending: "https://a815-190-6-214-189.ngrok-free.app/api/v1/pagos/pending",
-                //     failure: "https://a815-190-6-214-189.ngrok-free.app/api/v1/pagos/failure",
+                    //     pending: "https://a815-190-6-214-189.ngrok-free.app/api/v1/pagos/pending",
+                    //     failure: "https://a815-190-6-214-189.ngrok-free.app/api/v1/pagos/failure",
                 },
                 // notification_url: "http://localhost:3005/api/v1/pagos/webHook",
                 // back_urls: {
@@ -113,7 +125,7 @@ const recibeWebHook = async (req, res) => {
                     });
                     console.log('Evento "paymentApproved" emitido');
                 }
-                else{
+                else {
                     console.log('error emitiendo el payment')
                 }
             }
