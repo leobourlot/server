@@ -135,16 +135,7 @@ const callback = async (req, res) => {
             live_mode: tokenResponse.data.live_mode
         });
 
-        res.send(`
-            <html>
-                <body>
-                    <h3>Autorización exitosa. Puedes cerrar esta ventana.</h3>
-                    <script>
-                        window.close();
-                    </script>
-                </body>
-            </html>
-            `);
+        res.redirect(`http://localhost:3000/#/autorizacion`);
         // res.status(200).json(tokenResponse.data);
     } catch (error) {
         console.error('Error al obtener el token:', error.response?.data || error.message);
