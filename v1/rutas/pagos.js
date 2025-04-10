@@ -16,9 +16,9 @@ router
     .get('/failure', (req, res) => {
         res.send('Pago fallido');
     })
-    .get('/estado/:id', estadoPago)
+    // .get('/estado/:id', estadoPago)
     .post('/crearOrden', crearOrden)
-    .post('/webHook', recibeWebHook);
+    // .post('/webHook', recibeWebHook);
 
 
 
