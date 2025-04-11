@@ -5552,3 +5552,8 @@
 190.6.214.189 - - [08/Apr/2025:01:09:45 +0000] "GET /api/v1/organizador/organizadores HTTP/1.1" 200 1704 "http://localhost:3000/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36"
 190.6.214.189 - - [08/Apr/2025:01:09:47 +0000] "OPTIONS /api/v1/oauth/iniciar/6 HTTP/1.1" 204 0 "http://localhost:3000/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36"
 190.6.214.189 - - [08/Apr/2025:01:09:48 +0000] "GET /api/v1/oauth/iniciar/6 HTTP/1.1" 200 343 "http://localhost:3000/" "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Mobile Safari/537.36"
+192.168.100.5 - - [11/Apr/2025:17:53:44 +0000] "GET / HTTP/1.1" 200 28 "-" "Avast Antivirus"
+192.168.100.5 - - [11/Apr/2025:17:53:50 +0000] "GET /HNAP1/ HTTP/1.1" 404 145 "-" "Avast Antivirus"
+192.168.100.5 - - [11/Apr/2025:17:53:51 +0000] "GET /loginMsg.js HTTP/1.1" 404 150 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.168.100.5 - - [11/Apr/2025:17:53:51 +0000] "GET /cgi/get.cgi?cmd=home_login HTTP/1.1" 404 150 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.168.100.5 - - [11/Apr/2025:17:53:51 +0000] "POST /boaform/admin/formTracert HTTP/1.1" 404 165 "-" "Avast Antivirus"
