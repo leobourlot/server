@@ -37,7 +37,7 @@ buscarPorId = async (req, res) => {
 
 nuevo = async (req, res) => {
 
-    const { fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion } = req.body;
+    const { fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion, formaPago } = req.body;
 
     let filename;
     if (!req.file) {
@@ -52,7 +52,7 @@ nuevo = async (req, res) => {
     // console.log('ciudad en el controlador es: ', ciudad)
     // console.log('provincia en el controlador es: ', provincia)
 
-    if (!fechaInicio || !fechaFinal || !ciudad || !provincia || !organizador || !costoInscripcion) {
+    if (!fechaInicio || !fechaFinal || !ciudad || !provincia || !organizador || !costoInscripcion || !formaPago) {
         res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
     } else {
         const organizadorInt = +organizador
@@ -64,7 +64,8 @@ nuevo = async (req, res) => {
             ciudad: ciudad,
             provincia: provincia,
             costoInscripcion: costoInscripcion,
-            idOrganizador: organizadorInt
+            idOrganizador: organizadorInt,
+            formaPago: formaPago
         }
 
         try {
@@ -78,7 +79,7 @@ nuevo = async (req, res) => {
 }
 
 modificar = async (req, res) => {
-    const { idTorneo, fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion } = req.body;
+    const { idTorneo, fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion, formaPago } = req.body;
     // console.log('idTorneo en modificar antes de la modificacion es: ', idTorneo)
     // console.log('fechaInicio en modificar antes de la modificacion es: ', fechaInicio)
     // console.log('fechaFinal en modificar antes de la modificacion es: ', fechaFinal)
@@ -98,7 +99,8 @@ modificar = async (req, res) => {
             ciudad: ciudad,
             provincia: provincia,
             idOrganizador: organizadorInt,
-            costoInscripcion: costoInscripcion
+            costoInscripcion: costoInscripcion,
+            formaPago: formaPago
         }
 
         const torneoModificado = await torneoBD.modificar(dato, idTorneo);
