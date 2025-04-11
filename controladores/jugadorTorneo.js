@@ -66,7 +66,7 @@ inscripcion = async (req, res) => {
         // console.log('idTorneoInt es: ', idTorneoInt)
 
         if (!idTorneoInt || !idJugador1 || !idJugador2) {
-            res.status(404).json({ estado: 'FALLO', msj: 'faltan datos requeridos' });
+            res.status(404).json({ estado: 'FALLO', msj: `faltan datos requeridos, idTorneoInt es: ${idTorneoInt}, idJugador1 es: ${idJugador1}, idJugador2 es: ${idJugador2}` });
         }
 
         // Realizar una búsqueda para verificar si el jugador ya está inscrito en el torneo
