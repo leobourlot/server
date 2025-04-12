@@ -5557,3 +5557,7 @@
 192.168.100.5 - - [11/Apr/2025:17:53:51 +0000] "GET /loginMsg.js HTTP/1.1" 404 150 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.168.100.5 - - [11/Apr/2025:17:53:51 +0000] "GET /cgi/get.cgi?cmd=home_login HTTP/1.1" 404 150 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
 192.168.100.5 - - [11/Apr/2025:17:53:51 +0000] "POST /boaform/admin/formTracert HTTP/1.1" 404 165 "-" "Avast Antivirus"
+192.168.100.5 - - [12/Apr/2025:19:38:49 +0000] "GET / HTTP/1.1" 200 28 "-" "Avast Antivirus"
+192.168.100.5 - - [12/Apr/2025:19:38:55 +0000] "GET /HNAP1/ HTTP/1.1" 404 145 "-" "Avast Antivirus"
+192.168.100.5 - - [12/Apr/2025:19:38:56 +0000] "GET /loginMsg.js HTTP/1.1" 404 150 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"
+192.168.100.5 - - [12/Apr/2025:19:38:56 +0000] "GET /cgi/get.cgi?cmd=home_login HTTP/1.1" 404 150 "-" "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"

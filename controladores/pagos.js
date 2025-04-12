@@ -107,18 +107,44 @@ const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
 const recibeWebHook = async (req, res) => {
     try {
         // const query = req.query;
-        const payload = req.body; 
+        const payload = req.body;
         console.log("Payload recibido del webhook:", payload);
         const payment = req.query;
-        const idOrganizador = payload.external_reference || (payload.data && payload.data.external_reference);
+
+        const paymentId = payload.data.id;
+
+
+        const paymentDetails = await axios.get(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+            headers: {
+                Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
+            }
+        });
+
+        console.log('paymentDetails es: ', paymentDetails)
+
+        const merchantOrderId = paymentDetails.data.merchant_order_id;
+        console.log('merchantOrderId es: ', merchantOrderId)
+
+        const merchantOrderDetails = await axios.get(`https://api.mercadopago.com/merchant_orders/${merchantOrderId}`, {
+            headers: {
+                Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
+            }
+        });
+
+        console.log('merchantOrderDetails es: ', merchantOrderDetails)
         
+        const externalReference = merchantOrderDetails.data.external_reference;
+        console.log('external_reference:', externalReference);
+
+        // const idOrganizador = payload.external_reference || (payload.data && payload.data.external_reference);
+
         // O, si usaste metadata:
         // const externalReference = (payload.metadata && payload.metadata.external_reference) || payload.external_reference;
 
-        if (!idOrganizador) {
+        if (!externalReference) {
             console.log("No se encontró external_reference en el payload.");
         } else {
-            console.log("idOrganizador en external_reference:", idOrganizador);
+            console.log("idOrganizador en external_reference:", externalReference);
         }
         // console.log(payment);
         if (payment.type === "payment") {
@@ -135,7 +161,7 @@ const recibeWebHook = async (req, res) => {
                         paymentId: data.id,
                         preferenceId: data.preference_id,
                         status: data.status,
-                        idOrganizador: idOrganizador
+                        idOrganizador: externalReference
                     });
                     console.log('Evento "paymentApproved" emitido');
                 }
