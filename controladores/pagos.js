@@ -86,78 +86,78 @@ const crearOrden = async (req, res) => {
     }
 };
 
-// const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
-//     const paymentApi = new Payment(client)
-//     for (let i = 0; i < reintentos; i++) {
-//         try {
-//             const data = await paymentApi.get({ id });
-//             // console.log('data en obtenerpayment es: ', data)
-//             return data;
-//         } catch (error) {
-//             if (i === reintentos - 1) {
-//                 throw error;
-//             }
-//             // Espera antes de reintentar
-//             await new Promise(resolve => setTimeout(resolve, delay));
-//         }
-//     }
-// };
+const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
+    const paymentApi = new Payment(client)
+    for (let i = 0; i < reintentos; i++) {
+        try {
+            const data = await paymentApi.get({ id });
+            // console.log('data en obtenerpayment es: ', data)
+            return data;
+        } catch (error) {
+            if (i === reintentos - 1) {
+                throw error;
+            }
+            // Espera antes de reintentar
+            await new Promise(resolve => setTimeout(resolve, delay));
+        }
+    }
+};
 
-// const recibeWebHook = async (req, res) => {
-//     try {
-//         // const query = req.query;
+const recibeWebHook = async (req, res) => {
+    try {
+        // const query = req.query;
 
-//         const payment = req.query;
-//         // console.log(payment);
-//         if (payment.type === "payment") {
-//             // const data = await paymentApi.get({ id: payment["data.id"] });
-//             const data = await obtenerPaymentConReintento(payment["data.id"]);
+        const payment = req.query;
+        // console.log(payment);
+        if (payment.type === "payment") {
+            // const data = await paymentApi.get({ id: payment["data.id"] });
+            const data = await obtenerPaymentConReintento(payment["data.id"]);
 
-//             // console.log('data del payment es: ', data);
-//             if (data && data.status === 'approved') {
-//                 // Recupera la instancia de Socket.IO almacenada en app
-//                 const io = req.app.get('socketio');
-//                 // console.log('io es: ', io)
-//                 if (io) {
-//                     io.emit('paymentApproved', {
-//                         paymentId: data.id,
-//                         preferenceId: data.preference_id,
-//                         status: data.status
-//                     });
-//                     console.log('Evento "paymentApproved" emitido');
-//                 }
-//                 else {
-//                     console.log('error emitiendo el payment')
-//                 }
-//             }
-//         }
+            // console.log('data del payment es: ', data);
+            if (data && data.status === 'approved') {
+                // Recupera la instancia de Socket.IO almacenada en app
+                const io = req.app.get('socketio');
+                // console.log('io es: ', io)
+                if (io) {
+                    io.emit('paymentApproved', {
+                        paymentId: data.id,
+                        preferenceId: data.preference_id,
+                        status: data.status
+                    });
+                    console.log('Evento "paymentApproved" emitido');
+                }
+                else {
+                    console.log('error emitiendo el payment')
+                }
+            }
+        }
 
 
-//         res.sendStatus(204);
-//     } catch (error) {
-//         console.log('Error en el webhook: ', error);
-//         return res.status(500).json({ message: "Something goes wrong" });
-//     }
-// };
+        res.sendStatus(204);
+    } catch (error) {
+        console.log('Error en el webhook: ', error);
+        return res.status(500).json({ message: "Something goes wrong" });
+    }
+};
 
-// const estadoPago = async (req, res) => {
-//     try {
-//         const paymentId = req.params.id;
+const estadoPago = async (req, res) => {
+    try {
+        const paymentId = req.params.id;
 
-//         // console.log('payment id en estadoPago es: ', paymentId)
-//         const payment = await paymentApi.get({ id: paymentId });
+        // console.log('payment id en estadoPago es: ', paymentId)
+        const payment = await paymentApi.get({ id: paymentId });
 
-//         // console.log('paymentStatus en estadoPago es: ', payment.status)
+        // console.log('paymentStatus en estadoPago es: ', payment.status)
 
-//         res.json({ status: payment.status }); // "approved", "pending", "rejected"
-//     } catch (error) {
-//         console.error("Error obteniendo estado del pago:", error);
-//         res.status(500).json({ message: "Error al obtener el estado del pago" });
-//     }
-// };
+        res.json({ status: payment.status }); // "approved", "pending", "rejected"
+    } catch (error) {
+        console.error("Error obteniendo estado del pago:", error);
+        res.status(500).json({ message: "Error al obtener el estado del pago" });
+    }
+};
 
 module.exports = {
     crearOrden,
-    // recibeWebHook,
-    // estadoPago
+    recibeWebHook,
+    estadoPago
 }
