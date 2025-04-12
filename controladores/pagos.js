@@ -61,6 +61,7 @@ const crearOrden = async (req, res) => {
                 // notification_url: "https://wesley-defined-diamonds-garlic.trycloudflare.com/api/v1/pagos/webHook",
                 notification_url: `${process.env.BASE_URL}/api/v1/pagos/webHook`,
                 auto_return: "approved", // 🔹 Agrega esta línea
+                external_reference: idOrganizador,
 
                 back_urls: {
                     success: `${process.env.BASE_URL}/api/v1/pagos/success`,
@@ -106,8 +107,19 @@ const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
 const recibeWebHook = async (req, res) => {
     try {
         // const query = req.query;
-
+        const payload = req.body; 
+        console.log("Payload recibido del webhook:", payload);
         const payment = req.query;
+        const idOrganizador = payload.external_reference || (payload.data && payload.data.external_reference);
+        
+        // O, si usaste metadata:
+        // const externalReference = (payload.metadata && payload.metadata.external_reference) || payload.external_reference;
+
+        if (!idOrganizador) {
+            console.log("No se encontró external_reference en el payload.");
+        } else {
+            console.log("idOrganizador en external_reference:", idOrganizador);
+        }
         // console.log(payment);
         if (payment.type === "payment") {
             // const data = await paymentApi.get({ id: payment["data.id"] });
@@ -122,7 +134,8 @@ const recibeWebHook = async (req, res) => {
                     io.emit('paymentApproved', {
                         paymentId: data.id,
                         preferenceId: data.preference_id,
-                        status: data.status
+                        status: data.status,
+                        idOrganizador: idOrganizador
                     });
                     console.log('Evento "paymentApproved" emitido');
                 }
