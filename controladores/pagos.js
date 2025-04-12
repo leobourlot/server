@@ -112,6 +112,8 @@ const recibeWebHook = async (req, res) => {
         console.log("Payload recibido del webhook:", payload);
         const payment = req.query;
 
+        console.log('payment despues de payload es: ', payment)
+
         const paymentId = payload.data.id;
 
 
@@ -123,7 +125,7 @@ const recibeWebHook = async (req, res) => {
 
         console.log('paymentDetails es: ', paymentDetails)
 
-        const merchantOrderId = paymentDetails.data.merchant_order_id;
+        const merchantOrderId = paymentDetails.data.id;
         console.log('merchantOrderId es: ', merchantOrderId)
 
         const merchantOrderDetails = await axios.get(`https://api.mercadopago.com/merchant_orders/${merchantOrderId}`, {
