@@ -1,4 +1,5 @@
 const { MercadoPagoConfig, Preference, Payment } = require("mercadopago");
+const axios = require('axios');
 require('dotenv').config(); // Asegúrate de cargar las variables de entorno
 // const { MERCADOPAGO_API_KEY } = require("../config.js");
 const jugadorTorneoBD = require('../baseDatos/jugadorTorneoBD')
