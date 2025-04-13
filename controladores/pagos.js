@@ -89,6 +89,39 @@ const crearOrden = async (req, res) => {
 };
 
 const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
+    const payload = req.body;
+    // console.log("Payload recibido del webhook:", payload);
+
+
+    // console.log('payment despues de payload es: ', payment)
+
+    const paymentId = payload.data.id;
+
+
+    const paymentDetails = await axios.get(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+        headers: {
+            Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
+        }
+    });
+
+    // console.log('paymentDetails es: ', paymentDetails)
+
+    const externalReference = paymentDetails.data.external_reference;
+    console.log('external_reference:', externalReference);
+
+    if (!externalReference) {
+        console.log("No se encontró external_reference en el payload.");
+    } else {
+        console.log("idOrganizador en external_reference:", externalReference);
+    }
+
+    const vendedorToken = await obtenerToken(externalReference); // 👈 ahora sí, dentro de función async
+
+    const client = new MercadoPagoConfig({
+        accessToken: vendedorToken,
+        options: { timeout: 5000 }
+    });
+
     const paymentApi = new Payment(client)
     for (let i = 0; i < reintentos; i++) {
         try {
@@ -108,47 +141,9 @@ const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
 const recibeWebHook = async (req, res) => {
     try {
         // const query = req.query;
-        const payload = req.body;
-        console.log("Payload recibido del webhook:", payload);
+
         const payment = req.query;
 
-        console.log('payment despues de payload es: ', payment)
-
-        const paymentId = payload.data.id;
-
-
-        const paymentDetails = await axios.get(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-            headers: {
-                Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
-            }
-        });
-
-        console.log('paymentDetails es: ', paymentDetails)
-
-        // const merchantOrderId = paymentDetails.data.id;
-        // console.log('merchantOrderId es: ', merchantOrderId)
-
-        // const merchantOrderDetails = await axios.get(`https://api.mercadopago.com/merchant_orders/${merchantOrderId}`, {
-        //     headers: {
-        //         Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
-        //     }
-        // });
-
-        // console.log('merchantOrderDetails es: ', merchantOrderDetails)
-        
-        const externalReference = paymentDetails.data.external_reference;
-        console.log('external_reference:', externalReference);
-
-        // const idOrganizador = payload.external_reference || (payload.data && payload.data.external_reference);
-
-        // O, si usaste metadata:
-        // const externalReference = (payload.metadata && payload.metadata.external_reference) || payload.external_reference;
-
-        if (!externalReference) {
-            console.log("No se encontró external_reference en el payload.");
-        } else {
-            console.log("idOrganizador en external_reference:", externalReference);
-        }
         // console.log(payment);
         if (payment.type === "payment") {
             // const data = await paymentApi.get({ id: payment["data.id"] });
