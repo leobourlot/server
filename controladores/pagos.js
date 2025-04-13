@@ -125,18 +125,18 @@ const recibeWebHook = async (req, res) => {
 
         console.log('paymentDetails es: ', paymentDetails)
 
-        const merchantOrderId = paymentDetails.data.id;
-        console.log('merchantOrderId es: ', merchantOrderId)
+        // const merchantOrderId = paymentDetails.data.id;
+        // console.log('merchantOrderId es: ', merchantOrderId)
 
-        const merchantOrderDetails = await axios.get(`https://api.mercadopago.com/merchant_orders/${merchantOrderId}`, {
-            headers: {
-                Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
-            }
-        });
+        // const merchantOrderDetails = await axios.get(`https://api.mercadopago.com/merchant_orders/${merchantOrderId}`, {
+        //     headers: {
+        //         Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
+        //     }
+        // });
 
-        console.log('merchantOrderDetails es: ', merchantOrderDetails)
+        // console.log('merchantOrderDetails es: ', merchantOrderDetails)
         
-        const externalReference = merchantOrderDetails.data.external_reference;
+        const externalReference = paymentDetails.data.external_reference;
         console.log('external_reference:', externalReference);
 
         // const idOrganizador = payload.external_reference || (payload.data && payload.data.external_reference);
