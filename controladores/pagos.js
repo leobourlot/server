@@ -88,8 +88,7 @@ const crearOrden = async (req, res) => {
     }
 };
 
-const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
-    const payload = req.body;
+const obtenerPaymentConReintento = async (id, payload, reintentos = 1, delay = 5000) => {
     // console.log("Payload recibido del webhook:", payload);
 
 
@@ -141,13 +140,20 @@ const obtenerPaymentConReintento = async (id, reintentos = 1, delay = 5000) => {
 const recibeWebHook = async (req, res) => {
     try {
         // const query = req.query;
+        const payload = req.body;
 
-        const payment = req.query;
+        // const payment = req.query;
 
-        // console.log(payment);
-        if (payment.type === "payment") {
+        const paymentId = payload.data.id;
+
+         // console.log(payment);
+        
             // const data = await paymentApi.get({ id: payment["data.id"] });
-            const data = await obtenerPaymentConReintento(payment["data.id"]);
+        const data = await obtenerPaymentConReintento(paymentId, payload);
+
+        const externalReference = data.external_reference
+        
+        if (payload.type === "payment"){
 
             // console.log('data del payment es: ', data);
             if (data && data.status === 'approved') {
