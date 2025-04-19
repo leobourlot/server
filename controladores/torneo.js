@@ -50,8 +50,7 @@ nuevo = async (req, res) => {
     } else {
         const organizadorInt = +organizador
         // console.log(provincia)
-        const torneo = {
-            foto: filename,
+        const torneo = {            
             fechaInicio: fechaInicio,
             fechaFinal: fechaFinal,
             ciudad: ciudad,
