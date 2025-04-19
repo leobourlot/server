@@ -130,12 +130,12 @@ const callback = async (req, res) => {
             access_token: encrypt(tokenResponse.data.access_token),
             refresh_token: encrypt(tokenResponse.data.refresh_token),
             expires_in: tokenResponse.data.expires_in,
-            user_id: encrypt(tokenResponse.data.user_id),
+            user_id: tokenResponse.data.user_id,
             public_key: tokenResponse.data.public_key,
             live_mode: tokenResponse.data.live_mode
         });
 
-        res.redirect(`http://localhost:3000/#/autorizacion`);
+        res.redirect(`https://www.ajppargentina.com.ar/#/autorizacion`);
         // res.status(200).json(tokenResponse.data);
     } catch (error) {
         console.error('Error al obtener el token:', error.response?.data || error.message);
