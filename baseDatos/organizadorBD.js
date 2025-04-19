@@ -1,4 +1,6 @@
 const conexion = require('./conexionBD');
+const { decrypt } = require('../controladores/encrypt');
+
 
 const buscarPorId = async (idOrganizador) => {
 
@@ -115,8 +117,9 @@ const obtenerToken = async (idOrganizador) => {
             throw new Error('Organizador no encontrado');
         }
 
+        const resultadoDesencriptado = decrypt(resultado[0].access_token);
         // Retornamos solo el token
-        return resultado[0].access_token;
+        return resultadoDesencriptado
     } catch (error) {
         console.error('Error al obtener el token del organizador:', error);
         throw error;
