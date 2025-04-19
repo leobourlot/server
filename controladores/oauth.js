@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const axios = require('axios');
 const organizadorBD = require('../baseDatos/organizadorBD')
-const { encrypt } = require('./path/to/cryptoUtil');
+const { encrypt } = require('./encrypt');
 
 function generateCodeVerifier() {
     return crypto.randomBytes(32).toString('hex'); // 64 caracteres hexadecimales

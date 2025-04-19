@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const ENCRYPT_KEY = process.env.ENCRYPT_KEY; // Debe ser de 64 caracteres hexadecimales (32 bytes)
 const IV_LENGTH = 16; // La longitud del IV para AES (16 bytes)
 
-function encrypt(text) {
+const encrypt = (text) => {
     // Genera un IV aleatorio
     const iv = crypto.randomBytes(IV_LENGTH);
     // Convertimos la clave en Buffer desde hexadecimal:
@@ -16,7 +16,7 @@ function encrypt(text) {
     return iv.toString('hex') + ':' + encrypted;
 }
 
-function decrypt(text) {
+const decrypt = (text) => {
     const [ivHex, encryptedText] = text.split(':');
     const iv = Buffer.from(ivHex, 'hex');
     const key = Buffer.from(ENCRYPT_KEY, 'hex');
