@@ -39,14 +39,7 @@ nuevo = async (req, res) => {
 
     const { fechaInicio, fechaFinal, ciudad, provincia, organizador, costoInscripcion, formaPago } = req.body;
 
-    let filename;
-    if (!req.file) {
-        filename = 'default.jpg';
-    } else {
-        filename = req.file.filename;
-        // console.log('filename en crear es: ', filename)
-    }
-
+    
     // console.log('fechaInicio en el controlador es: ', fechaInicio)
     // console.log('fechaFinal en el controlador es: ', fechaFinal)
     // console.log('ciudad en el controlador es: ', ciudad)

@@ -6,6 +6,7 @@ const jugadorTorneoBD = require('../baseDatos/jugadorTorneoBD')
 const torneoBD = require('../baseDatos/torneoBD')
 const { obtenerToken } = require('../baseDatos/organizadorBD');
 
+
 // const vendedorToken = await obtenerToken(idOrganizador);
 
 // const client = new MercadoPagoConfig({
@@ -67,7 +68,7 @@ const crearOrden = async (req, res) => {
                 back_urls: {
                     success: `${process.env.BASE_URL}/api/v1/pagos/success`,
                     //     pending: "https://a815-190-6-214-189.ngrok-free.app/api/v1/pagos/pending",
-                    //     failure: "https://a815-190-6-214-189.ngrok-free.app/api/v1/pagos/failure",
+                    failure: `${process.env.FRONTEND_URL}/#/rechazo`,
                 },
                 // notification_url: "http://localhost:3005/api/v1/pagos/webHook",
                 // back_urls: {

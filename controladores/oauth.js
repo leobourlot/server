@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const axios = require('axios');
 const organizadorBD = require('../baseDatos/organizadorBD')
-
+const { encrypt } = require('./path/to/cryptoUtil');
 
 function generateCodeVerifier() {
     return crypto.randomBytes(32).toString('hex'); // 64 caracteres hexadecimales
@@ -127,10 +127,10 @@ const callback = async (req, res) => {
         console.log('el callback es: ', tokenResponse.data)
 
         await organizadorBD.actualizarToken(idOrganizador, {
-            access_token: tokenResponse.data.access_token,
-            refresh_token: tokenResponse.data.refresh_token,
+            access_token: encrypt(tokenResponse.data.access_token),
+            refresh_token: encrypt(tokenResponse.data.refresh_token),
             expires_in: tokenResponse.data.expires_in,
-            user_id: tokenResponse.data.user_id,
+            user_id: encrypt(tokenResponse.data.user_id),
             public_key: tokenResponse.data.public_key,
             live_mode: tokenResponse.data.live_mode
         });
