@@ -55,6 +55,7 @@ app.use(session({
     secret: '1234', // Cambia esto por una cadena segura
     resave: false,
     saveUninitialized: true,
+    rolling: true, // Renueva la cookie en cada solicitud
     cookie: {
         secure: true, // true si usas HTTPS en producción
         maxAge: 600000, // duración en milisegundos (opcional)
