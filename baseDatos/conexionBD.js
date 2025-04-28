@@ -5,7 +5,8 @@ const mysql = require('mysql2/promise');
 
 // conexión a la base de datos
 const conexion = mysql.createPool({
-    host: 'srv1198.hstgr.io',
+    // host: 'srv1198.hstgr.io',
+    host: '127.0.0.1',
     user: 'u144219150_leobourlot',
     database: 'u144219150_ajpp',
     password: 'EDdV3C*0Aa3;',
