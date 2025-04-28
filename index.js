@@ -19,36 +19,18 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
 app.use(morgan('combined', { stream: accessLogStream }));
 const corsOptions = {
     // origin: 'http://localhost:3000', // El origen que necesitas permitir
-    origin: 'https://www.ajppargentina.com.ar', // El origen que necesitas permitir
+    origin: ['https://www.ajppargentina.com.ar', 'http://localhost:3000'], // El origen que necesitas permitir
     credentials: true
 };
 app.use(cors(corsOptions));
 
 
 app.use(express.static(path.join(__dirname, 'public_html')));
-// Configura multer para manejar la carga de imágenes
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//       cb(null, 'ruta/a/tu/carpeta'); // Ruta de la carpeta donde deseas guardar las imágenes
-//     },
-//     filename: (req, file, cb) => {
-//       const extname = path.extname(file.originalname);
-//       const filename = 'imagen_' + Date.now() + extname; // Nombre único basado en la marca de tiempo
-//       cb(null, filename);
-//     },
-//   });
 
 // Servir archivos estáticos desde el directorio 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-//   const upload = multer({ storage: storage });
-// app.use((req, res, next) => {
-//     res.setHeader(
-//         "Content-Security-Policy",
-//         "default-src 'self' https://cdn.ngrok.com 'unsafe-inline' 'unsafe-eval'; font-src 'self' https://assets.ngrok.com https://cdn.ngrok.com;"
-//     );
-//     next();
-// });
+app.use('/archivos', express.static(path.join(__dirname, 'archivos')));
 
 app.set('trust proxy', 1);
 app.use(session({
