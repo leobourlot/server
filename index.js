@@ -17,13 +17,37 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('short'));
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 app.use(morgan('combined', { stream: accessLogStream }));
+
+const allowedOrigins = [
+    'https://www.ajppargentina.com.ar',
+    'http://localhost:3000'
+];
+
+// const corsOptions = {
+//     // origin: 'http://localhost:3000', // El origen que necesitas permitir
+//     origin: ['https://www.ajppargentina.com.ar', 'http://localhost:3000'], // El origen que necesitas permitir
+//     credentials: true
+// };
+// app.use(cors(corsOptions));
+
 const corsOptions = {
-    // origin: 'http://localhost:3000', // El origen que necesitas permitir
-    origin: ['https://www.ajppargentina.com.ar', 'http://localhost:3000'], // El origen que necesitas permitir
-    credentials: true
+    origin: (origin, callback) => {
+        // origin vendrá undefined en Postman o curl, 
+        // así que permitimos esos casos devolviendo true
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`Origen ${origin} no permitido por CORS`));
+        }
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 };
+
 app.use(cors(corsOptions));
 
+app.options('*', cors(corsOptions));
 
 app.use(express.static(path.join(__dirname, 'public_html')));
 
