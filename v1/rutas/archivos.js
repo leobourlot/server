@@ -2,15 +2,12 @@ const Router = require('express');
 
 // const {buscarPorId, buscarTodos, nuevo, modificar, eliminar} = require('../../controladores/torneo');
 
-// const { upload, cambiarImagenTorneo } = require('../../controladores/subirArchivo')
-const { uploadFile, handleUpload } = require('../../controladores/subirArchivo');
+const { upload, cambiarImagenTorneo } = require('../../controladores/subirArchivo')
 
 
 const router = Router();
 
-// router.post('/proximoTorneo', upload, cambiarImagenTorneo);
-
-router.post('/:tipo', uploadFile, handleUpload);
+router.post('/proximoTorneo', upload, cambiarImagenTorneo);
 
 // router.put('/modificar/:idTorneo', upload, modificar);
 
