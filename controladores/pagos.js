@@ -144,16 +144,21 @@ const recibeWebHook = async (req, res) => {
         const payload = req.body;
 
         // const payment = req.query;
+        console.log('payload es: ', payload)
 
         const paymentId = payload.data.id;
+
+        console.log('paymentId es: ', paymentId)
 
          // console.log(payment);
         
             // const data = await paymentApi.get({ id: payment["data.id"] });
         const data = await obtenerPaymentConReintento(paymentId, payload);
 
+        console.log('data es: ', data)
         const externalReference = data.external_reference
-        
+        console.log('externalReference es: ', externalReference)
+
         if (payload.type === "payment"){
 
             // console.log('data del payment es: ', data);
