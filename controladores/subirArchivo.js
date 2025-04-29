@@ -16,31 +16,22 @@ const upload = multer({ storage: storage });
 
 exports.upload = upload.single('foto');
 
-// Ruta para cambiar la imagen del próximo torneo
 exports.cambiarImagenTorneo = (req, res) => {
     const fotoProximoTorneo = req.file;
-
-    // console.log('fotoProximoTorneo en el controlador es: ', fotoProximoTorneo)
 
     if (!fotoProximoTorneo) {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    // Ruta donde se guarda la imagen del próximo torneo
     const rutaImagenTorneo = path.join(__dirname, '..', 'archivos', 'imagenTorneo.png');
 
     try {
-        // Verifica si ya existe una imagen del próximo torneo
         if (fs.existsSync(rutaImagenTorneo)) {
-            // Si existe, elimina la imagen anterior
             fs.unlinkSync(rutaImagenTorneo);
         }
 
-        // Guarda la nueva imagen con el mismo nombre de archivo fijo
         try{
         fs.renameSync(fotoProximoTorneo.path, rutaImagenTorneo);
-        
-
         res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
         } catch (error){
             console.error ('Error al escribir archivo: ', error)
@@ -48,5 +39,187 @@ exports.cambiarImagenTorneo = (req, res) => {
     } catch (error) {
         console.error('Error al actualizar la imagen del próximo torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del próximo torneo.' });
+    }
+};
+
+exports.cambiarImagenTorneo2 = (req, res) => {
+    const fotoProximoTorneo2 = req.file;
+
+    if (!fotoProximoTorneo2) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    const rutaImagenTorneo2 = path.join(__dirname, '..', 'archivos', 'imagenTorneo2.png');
+
+    try {
+        if (fs.existsSync(rutaImagenTorneo2)) {
+            fs.unlinkSync(rutaImagenTorneo2);
+        }
+
+        try{
+        fs.renameSync(fotoProximoTorneo2.path, rutaImagenTorneo2);
+        res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar la imagen del próximo torneo:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del próximo torneo.' });
+    }
+};
+
+exports.cambiarCalendario1 = (req, res) => {
+    const fotoCalendario1 = req.file;
+
+    if (!fotoCalendario1) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    const rutaImagenCalendario1 = path.join(__dirname, '..', 'archivos', 'calendario1.png');
+
+    try {
+        if (fs.existsSync(rutaImagenCalendario1)) {
+            fs.unlinkSync(rutaImagenCalendario1);
+        }
+
+        try{
+        fs.renameSync(fotoCalendario1.path, rutaImagenCalendario1);
+        res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar la imagen del calendario:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del calendario.' });
+    }
+};
+
+exports.cambiarCalendario2 = (req, res) => {
+    const fotoCalendario2 = req.file;
+
+    if (!fotoCalendario2) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    const rutaImagenCalendario2 = path.join(__dirname, '..', 'archivos', 'calendario2.png');
+
+    try {
+        if (fs.existsSync(rutaImagenCalendario2)) {
+            fs.unlinkSync(rutaImagenCalendario2);
+        }
+
+        try{
+        fs.renameSync(fotoCalendario2.path, rutaImagenCalendario2);
+        res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar la imagen del calendario:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del calendario.' });
+    }
+};
+
+exports.cambiarCalendario3 = (req, res) => {
+    const fotoCalendario3 = req.file;
+
+    if (!fotoCalendario3) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    const rutaImagenCalendario3 = path.join(__dirname, '..', 'archivos', 'calendario3.png');
+
+    try {
+        if (fs.existsSync(rutaImagenCalendario3)) {
+            fs.unlinkSync(rutaImagenCalendario3);
+        }
+
+        try{
+        fs.renameSync(fotoCalendario3.path, rutaImagenCalendario3);
+        res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar la imagen del calendario:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del calendario.' });
+    }
+};
+
+exports.cambiarRanking = (req, res) => {
+    const fotoRanking = req.file;
+
+    if (!fotoRanking) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    const rutaImagenRanking = path.join(__dirname, '..', 'archivos', 'ranking.png');
+
+    try {
+        if (fs.existsSync(rutaImagenRanking)) {
+            fs.unlinkSync(rutaImagenRanking);
+        }
+
+        try{
+        fs.renameSync(fotoRanking.path, rutaImagenRanking);
+        res.status(200).json({ mensaje: 'Imagen del ranking actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar la imagen del ranking:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del ranking.' });
+    }
+};
+
+exports.cambiarRankingVertical = (req, res) => {
+    const fotoRankingVertical = req.file;
+
+    if (!fotoRankingVertical) {
+        return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
+    }
+
+    const rutaImagenRankingVertical = path.join(__dirname, '..', 'archivos', 'rankingVertical.png');
+
+    try {
+        if (fs.existsSync(rutaImagenRankingVertical)) {
+            fs.unlinkSync(rutaImagenRankingVertical);
+        }
+
+        try{
+        fs.renameSync(fotoRankingVertical.path, rutaImagenRankingVertical);
+        res.status(200).json({ mensaje: 'Imagen del ranking vertical actualizada correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar la imagen del ranking vertical:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del ranking vertical.' });
+    }
+};
+
+exports.cambiarRankingPdf = (req, res) => {
+    const rankingPdf = req.file;
+
+    if (!rankingPdf) {
+        return res.status(400).json({ error: 'No se proporcionó ningun pdf.' });
+    }
+
+    const rutaRankingPdf = path.join(__dirname, '..', 'archivos', 'rankingCompleto.pdf');
+
+    try {
+        if (fs.existsSync(rutaRankingPdf)) {
+            fs.unlinkSync(rutaRankingPdf);
+        }
+
+        try{
+        fs.renameSync(rankingPdf.path, rutaRankingPdf);
+        res.status(200).json({ mensaje: 'Pdf de ranking actualizado correctamente.' });
+        } catch (error){
+            console.error ('Error al escribir archivo: ', error)
+        }        
+    } catch (error) {
+        console.error('Error al actualizar el pdf de ranking:', error);
+        res.status(500).json({ error: 'Error interno del servidor al actualizar el pdf de ranking.' });
     }
 };
