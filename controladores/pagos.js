@@ -89,7 +89,7 @@ const crearOrden = async (req, res) => {
     }
 };
 
-const obtenerPaymentConReintento = async (paymentId, payload, reintentos = 1, delay = 5000) => {
+const obtenerPaymentConReintento = async (id, payload, reintentos = 1, delay = 5000) => {
     console.log("Payload recibido del webhook:", payload);
 
     // console.log('id es: ', paymentId)
