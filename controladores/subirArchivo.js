@@ -214,12 +214,12 @@ exports.cambiarRankingPdf = (req, res) => {
 
         try{
         fs.renameSync(rankingPdf.path, rutaRankingPdf);
-        res.status(200).json({ mensaje: 'Pdf de ranking actualizado correctamente.' });
+        return res.status(200).json({ mensaje: 'Pdf de ranking actualizado correctamente.' });
         } catch (error){
             console.error ('Error al escribir archivo: ', error)
         }        
     } catch (error) {
         console.error('Error al actualizar el pdf de ranking:', error);
-        res.status(500).json({ error: 'Error interno del servidor al actualizar el pdf de ranking.' });
+        return res.status(500).json({ error: 'Error interno del servidor al actualizar el pdf de ranking.' });
     }
 };
