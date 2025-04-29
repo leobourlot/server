@@ -92,12 +92,12 @@ const crearOrden = async (req, res) => {
 const obtenerPaymentConReintento = async (id, payload, reintentos = 1, delay = 5000) => {
     // console.log("Payload recibido del webhook:", payload);
 
-
+    console.log('id es: ', id)
     // console.log('payment despues de payload es: ', payment)
 
     const paymentId = payload.data.id;
 
-
+    console.log('paymentId es: ', paymentId)
     const paymentDetails = await axios.get(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
         headers: {
             Authorization: `Bearer ${process.env.MERCADOPAGO_API_KEY}`  // o el token adecuado
@@ -150,16 +150,16 @@ const recibeWebHook = async (req, res) => {
 
         console.log('paymentId es: ', paymentId)
 
-         // console.log(payment);
-        
-            // const data = await paymentApi.get({ id: payment["data.id"] });
+        // console.log(payment);
+
+        // const data = await paymentApi.get({ id: payment["data.id"] });
         const data = await obtenerPaymentConReintento(paymentId, payload);
 
         console.log('data es: ', data)
         const externalReference = data.external_reference
         console.log('externalReference es: ', externalReference)
 
-        if (payload.type === "payment"){
+        if (payload.type === "payment") {
 
             // console.log('data del payment es: ', data);
             if (data && data.status === 'approved') {
