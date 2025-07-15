@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 });
 
 // Hasta 10 archivos en el campo "archivos"
-const upload = multer({ storage }).array('uploadData', 10);
+const upload = multer({ storage }).array('archivos', 10);
 
 // Middleware de subida
 exports.uploadImagenesNoticias = upload;
