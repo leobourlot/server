@@ -28,11 +28,13 @@ exports.uploadImagenesNoticias = upload;
 // Controlador que devuelve las URLs públicas
 exports.cambiarImagenesNoticias = (req, res) => {
     const files = req.files;
+    console.log('Archivos subidos:', files);
     if (!files || files.length === 0) {
         return res.status(400).json({ error: 'No se subió ninguna imagen.' });
     }
 
     // Construye las URLs de acceso
+    console.log('Construyendo URLs para las imágenes subidas...');
     const urls = files.map(f => {
         return `/archivos/imagenesNoticias/${encodeURIComponent(f.filename)}`;
     });
