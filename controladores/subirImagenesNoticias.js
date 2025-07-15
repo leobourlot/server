@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage }).array('archivos', 10);
 
 // Middleware de subida
-exports.uploadImagenesNoticias = upload;
+uploadImagenesNoticias = upload;
 
 // Controlador que devuelve las URLs públicas
-exports.cambiarImagenesNoticias = (req, res) => {
+cambiarImagenesNoticias = (req, res) => {
     const files = req.files;
     console.log('Archivos subidos:', files);
     if (!files || files.length === 0) {
@@ -41,3 +41,5 @@ exports.cambiarImagenesNoticias = (req, res) => {
 
     res.status(200).json({ mensaje: 'Imágenes de noticia subidas correctamente', urls });
 };
+
+module.exports = {uploadImagenesNoticias, cambiarImagenesNoticias};
