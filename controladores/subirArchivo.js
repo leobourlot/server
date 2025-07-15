@@ -30,12 +30,12 @@ exports.cambiarImagenTorneo = (req, res) => {
             fs.unlinkSync(rutaImagenTorneo);
         }
 
-        try{
-        fs.renameSync(fotoProximoTorneo.path, rutaImagenTorneo);
-        res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoProximoTorneo.path, rutaImagenTorneo);
+            res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del próximo torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del próximo torneo.' });
@@ -56,12 +56,12 @@ exports.cambiarImagenTorneo2 = (req, res) => {
             fs.unlinkSync(rutaImagenTorneo2);
         }
 
-        try{
-        fs.renameSync(fotoProximoTorneo2.path, rutaImagenTorneo2);
-        res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoProximoTorneo2.path, rutaImagenTorneo2);
+            res.status(200).json({ mensaje: 'Imagen del próximo torneo actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del próximo torneo:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del próximo torneo.' });
@@ -82,12 +82,12 @@ exports.cambiarCalendario1 = (req, res) => {
             fs.unlinkSync(rutaImagenCalendario1);
         }
 
-        try{
-        fs.renameSync(fotoCalendario1.path, rutaImagenCalendario1);
-        res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoCalendario1.path, rutaImagenCalendario1);
+            res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del calendario:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del calendario.' });
@@ -108,12 +108,12 @@ exports.cambiarCalendario2 = (req, res) => {
             fs.unlinkSync(rutaImagenCalendario2);
         }
 
-        try{
-        fs.renameSync(fotoCalendario2.path, rutaImagenCalendario2);
-        res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoCalendario2.path, rutaImagenCalendario2);
+            res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del calendario:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del calendario.' });
@@ -134,12 +134,12 @@ exports.cambiarCalendario3 = (req, res) => {
             fs.unlinkSync(rutaImagenCalendario3);
         }
 
-        try{
-        fs.renameSync(fotoCalendario3.path, rutaImagenCalendario3);
-        res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoCalendario3.path, rutaImagenCalendario3);
+            res.status(200).json({ mensaje: 'Imagen del calendario actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del calendario:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del calendario.' });
@@ -160,12 +160,12 @@ exports.cambiarRanking = (req, res) => {
             fs.unlinkSync(rutaImagenRanking);
         }
 
-        try{
-        fs.renameSync(fotoRanking.path, rutaImagenRanking);
-        res.status(200).json({ mensaje: 'Imagen del ranking actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoRanking.path, rutaImagenRanking);
+            res.status(200).json({ mensaje: 'Imagen del ranking actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del ranking:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del ranking.' });
@@ -186,12 +186,12 @@ exports.cambiarRankingVertical = (req, res) => {
             fs.unlinkSync(rutaImagenRankingVertical);
         }
 
-        try{
-        fs.renameSync(fotoRankingVertical.path, rutaImagenRankingVertical);
-        res.status(200).json({ mensaje: 'Imagen del ranking vertical actualizada correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(fotoRankingVertical.path, rutaImagenRankingVertical);
+            res.status(200).json({ mensaje: 'Imagen del ranking vertical actualizada correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar la imagen del ranking vertical:', error);
         res.status(500).json({ error: 'Error interno del servidor al actualizar la imagen del ranking vertical.' });
@@ -214,14 +214,35 @@ exports.cambiarRankingPdf = (req, res) => {
             fs.unlinkSync(rutaRankingPdf);
         }
 
-        try{
-        fs.renameSync(rankingPdf.path, rutaRankingPdf);
-        return res.status(200).json({ mensaje: 'Pdf de ranking actualizado correctamente.' });
-        } catch (error){
-            console.error ('Error al escribir archivo: ', error)
-        }        
+        try {
+            fs.renameSync(rankingPdf.path, rutaRankingPdf);
+            return res.status(200).json({ mensaje: 'Pdf de ranking actualizado correctamente.' });
+        } catch (error) {
+            console.error('Error al escribir archivo: ', error)
+        }
     } catch (error) {
         console.error('Error al actualizar el pdf de ranking:', error);
         return res.status(500).json({ error: 'Error interno del servidor al actualizar el pdf de ranking.' });
     }
+};
+
+exports.handleUploadNoticiaImagen = (req, res) => {
+    const idx = req.params.index;
+    const file = req.file;
+    if (!file) return res.status(400).json({ error: 'No llegó archivo.' });
+
+    // Guarda en carpetas /archivos/imagenesNoticias
+    const destDir = path.join(__dirname, '..', 'archivos', 'imagenesNoticias');
+    if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
+
+    const ext = path.extname(file.originalname);
+    const finalName = `${Date.now()}_${idx}${ext}`;              // o usa uuid
+    const finalPath = path.join(destDir, finalName);
+
+    // elimina anterior si quieres
+    fs.renameSync(file.path, finalPath);
+
+    // construye URL pública (recuerda exponer /archivos en express.static)
+    const publicUrl = `${process.env.API_BASE_URL}/archivos/imagenesNoticias/${finalName}`;
+    res.json({ url: publicUrl });
 };

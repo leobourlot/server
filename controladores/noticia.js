@@ -75,6 +75,7 @@ nueva = async (req, res) => {
             const nuevaNoticia = await noticiaBD.nueva(noticia);
             res.status(201).json({ estado: 'OK', msj: 'Noticia creada', dato: nuevaNoticia });
         } catch (exec) {
+            console.error('Error al crear la noticia:', exec);
             throw exec;
         }
     }
