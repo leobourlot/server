@@ -35,8 +35,10 @@ exports.cambiarImagenesNoticias = (req, res) => {
 
     // Construye las URLs de acceso
     console.log('Construyendo URLs para las imágenes subidas...');
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+
     const urls = files.map(f => {
-        return `/archivos/imagenesNoticias/${encodeURIComponent(f.filename)}`;
+        return `${baseUrl}/archivos/imagenesNoticias/${encodeURIComponent(f.filename)}`;
     });
 
     res.status(200).json({ mensaje: 'Imágenes de noticia subidas correctamente', urls });
