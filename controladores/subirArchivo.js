@@ -199,10 +199,10 @@ exports.cambiarRankingVertical = (req, res) => {
 };
 
 exports.cambiarRankingPdf = (req, res) => {
-    console.log('controlador pdf llamado')
+    // console.log('controlador pdf llamado')
     const rankingPdf = req.file;
 
-    console.log('rankingPdf: ', rankingPdf)
+    // console.log('rankingPdf: ', rankingPdf)
     if (!rankingPdf) {
         return res.status(400).json({ error: 'No se proporcionó ningun pdf.' });
     }
@@ -229,7 +229,7 @@ exports.cambiarRankingPdf = (req, res) => {
 exports.handleUploadNoticiaImagen = (req, res) => {
     const idx = req.params.index;
     const file = req.file;
-    console.log('handleUploadNoticiaImagen llamado con idx:', idx, 'y file:', file);
+    // console.log('handleUploadNoticiaImagen llamado con idx:', idx, 'y file:', file);
     if (!file) return res.status(400).json({ error: 'No llegó archivo.' });
 
     // Guarda en carpetas /archivos/imagenesNoticias

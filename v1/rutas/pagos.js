@@ -7,7 +7,7 @@ const router = Router();
 
 router
     .get('/success', (req, res) => {
-        console.log('pagina success llamada')
+        // console.log('pagina success llamada')
         res.sendFile(path.join(__dirname, '../../public/success.html'));
     })
     .get('/pending', (req, res) => {

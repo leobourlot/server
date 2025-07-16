@@ -284,7 +284,7 @@ const recibeWebHook = async (req, res) => {
 
         // Obtener detalles del pago
         const paymentDetails = await paymentApi.get({ id: paymentId });
-        console.log('Detalles del pago:', paymentDetails);
+        // console.log('Detalles del pago:', paymentDetails);
 
         // Emitir evento si está aprobado
         if (paymentDetails.status === 'approved') {
@@ -295,7 +295,7 @@ const recibeWebHook = async (req, res) => {
                 status: paymentDetails.status,
                 idOrganizador
             });
-            console.log('Evento paymentApproved emitido');
+            // console.log('Evento paymentApproved emitido');
         }
 
         return res.sendStatus(204);

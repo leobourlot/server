@@ -25,7 +25,7 @@ exports.enviarCorreo = async (req, res) => {
         mensaje: mensaje
     };
 
-    console.log(datos)
+    // console.log(datos)
 
     // Renderizo la plantilla con los datos
     const correoHtml = correoTemplate(datos);

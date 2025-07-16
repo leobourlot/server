@@ -59,9 +59,9 @@ inscripcion = async (req, res) => {
 
         const idTorneoInt = +idTorneo.idTorneo
 
-        console.log('idTorneoInt es: ', idTorneoInt)
-        console.log('idJugador1 en el controlador es: ', idJugador1)
-        console.log('idJugador2 en el controlador es: ', idJugador2)
+        // console.log('idTorneoInt es: ', idTorneoInt)
+        // console.log('idJugador1 en el controlador es: ', idJugador1)
+        // console.log('idJugador2 en el controlador es: ', idJugador2)
         
         if (!idTorneoInt || !idJugador1 || !idJugador2) {
             res.status(404).json({ estado: 'FALLO', msj: `faltan datos requeridos, idTorneoInt es: ${idTorneoInt}, idJugador1 es: ${idJugador1}, idJugador2 es: ${idJugador2}` });

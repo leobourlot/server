@@ -5,7 +5,7 @@ const estadistica = async () => {
 
     const [results] = await conexion.query(consulta);
 
-    console.log(results);
+    // console.log(results);
 
     const futbolistas = results[0][0].cantidadFutbolistas;
     const convocatorias = results[0][0].cantidadConvocatorias;

@@ -26,7 +26,7 @@ const code_challenge_method = 'S256'; // O "Plain" si se desea
 const iniciarOAuth = async (req, res) => {
     try {
         const idOrganizador = req.params.idOrganizador;
-        console.log('organizadorId en iniciar es: ', idOrganizador)
+        // console.log('organizadorId en iniciar es: ', idOrganizador)
         if (idOrganizador) {
             req.session.idOrganizador = idOrganizador;
         }
@@ -54,17 +54,17 @@ const iniciarOAuth = async (req, res) => {
         const client_id = process.env.CLIENT_ID;  // Reemplaza con tu client_id
         const redirect_uri = process.env.REDIRECT_URI; // Debe coincidir con lo registrado en Mercado Pago
 
-        console.log('state al iniciar es: ', state)
-        console.log('code verifier al iniciar es: ', code_verifier)
-        console.log('client_id al iniciar es: ', client_id)
-        console.log('redirect_uri al iniciar es: ', redirect_uri)
+        // console.log('state al iniciar es: ', state)
+        // console.log('code verifier al iniciar es: ', code_verifier)
+        // console.log('client_id al iniciar es: ', client_id)
+        // console.log('redirect_uri al iniciar es: ', redirect_uri)
 
         // Construcción de la URL de autorización
 
         const authorizationUrl = `https://auth.mercadopago.com/authorization?response_type=code&client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}`;
 
         // Redirige al usuario a la URL de Mercado Pago
-        console.log(authorizationUrl)
+        // console.log(authorizationUrl)
         // return res.redirect(authorizationUrl);
         return res.status(200).json({ authorizationUrl });
     } catch (error) {
@@ -77,11 +77,11 @@ const iniciarOAuth = async (req, res) => {
 
 // controllers/oauth.controller.js (o en otro archivo, según tu estructura)
 const callback = async (req, res) => {
-    console.log('función callback llamada.')
+    // console.log('función callback llamada.')
     const { code, state } = await req.query;
 
     const oauthData = await organizadorBD.obtenerOAuthDataPorState(state);
-    console.log('oauthData es: ', oauthData)
+    // console.log('oauthData es: ', oauthData)
     if (!oauthData) {
         return res.status(400).json({ message: "No se encontró información de OAuth para el state recibido." });
     }
@@ -91,27 +91,27 @@ const callback = async (req, res) => {
     // const code_verifier = await req.session.code_verifier;
     // const idOrganizador = req.session.idOrganizador; // Recupera el idOrganizador si fue enviado
 
-    console.log('code es: ', code)
-    console.log('state es: ', state)
+    // console.log('code es: ', code)
+    // console.log('state es: ', state)
     // console.log('storedState es: ', storedState)
-    console.log('codeVerifier es: ', oauthCodeVerifier)
-    console.log('idOrganizador es: ', idOrganizador)
+    // console.log('codeVerifier es: ', oauthCodeVerifier)
+    // console.log('idOrganizador es: ', idOrganizador)
 
     // if (state !== storedState) {
     //     return res.status(400).send("Error: El estado no coincide, posible ataque CSRF");
     // }
 
-    console.log('code es: ', code);
-    console.log('Autorizacion exitosa')
+    // console.log('code es: ', code);
+    // console.log('Autorizacion exitosa')
 
     // Variables de configuración (idealmente desde variables de entorno)
     const client_id = process.env.CLIENT_ID;
     const client_secret = process.env.CLIENT_SECRET;
     const redirect_uri = process.env.REDIRECT_URI;
 
-    console.log('clientId es: ', client_id)
-    console.log('clientSecret es: ', client_secret)
-    console.log('redirectUri es: ', redirect_uri)
+    // console.log('clientId es: ', client_id)
+    // console.log('clientSecret es: ', client_secret)
+    // console.log('redirectUri es: ', redirect_uri)
 
     try {
         const tokenResponse = await axios.post('https://api.mercadopago.com/oauth/token', {
@@ -124,7 +124,7 @@ const callback = async (req, res) => {
         });
 
         // Aquí puedes guardar el token recibido (access_token, refresh_token, etc.) de forma segura.
-        console.log('el callback es: ', tokenResponse.data)
+        // console.log('el callback es: ', tokenResponse.data)
 
         await organizadorBD.actualizarToken(idOrganizador, {
             access_token: encrypt(tokenResponse.data.access_token),
