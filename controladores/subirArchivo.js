@@ -229,6 +229,7 @@ exports.cambiarRankingPdf = (req, res) => {
 exports.handleUploadNoticiaImagen = (req, res) => {
     const idx = req.params.index;
     const file = req.file;
+    console.log('handleUploadNoticiaImagen llamado con idx:', idx, 'y file:', file);
     if (!file) return res.status(400).json({ error: 'No llegó archivo.' });
 
     // Guarda en carpetas /archivos/imagenesNoticias
