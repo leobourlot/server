@@ -3,7 +3,7 @@ const Router = require('express');
 // const {buscarPorId, buscarTodos, nuevo, modificar, eliminar} = require('../../controladores/torneo');
 
 const { upload, cambiarImagenTorneo, cambiarImagenTorneo2, cambiarCalendario1, cambiarCalendario2, cambiarCalendario3, cambiarRanking, cambiarRankingPdf, cambiarRankingVertical, handleUploadNoticiaImagen } = require('../../controladores/subirArchivo')
-// const { uploadImagenesNoticias, cambiarImagenesNoticias } = require('../../controladores/subirImagenesNoticias');
+const { uploadImagenesNoticias, cambiarImagenesNoticias } = require('../../controladores/subirImagenesNoticias');
 
 
 
@@ -18,7 +18,7 @@ router.post('/ranking', upload, cambiarRanking);
 router.post('/rankingVertical', upload, cambiarRankingVertical);
 router.post('/rankingPdf', upload, cambiarRankingPdf);
 router.post('/noticia/:index', upload, handleUploadNoticiaImagen);
-router.post('/imagenesNoticias', handleUploadNoticiaImagen);
+router.post('/imagenesNoticias', uploadImagenesNoticias, cambiarImagenesNoticias);
 
 // router.put('/modificar/:idTorneo', upload, modificar);
 
