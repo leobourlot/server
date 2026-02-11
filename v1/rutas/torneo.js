@@ -2,14 +2,14 @@ const Router = require('express');
 
 const {buscarPorId, buscarTodos, nuevo, modificar, eliminar, cerrarInscripcion} = require('../../controladores/torneo');
 
-const { uploadSingle } = require('../../controladores/subirArchivo')
+const { upload } = require('../../controladores/subirArchivo')
 
 
 const router = Router();
 
-router.post('/nuevo', uploadSingle, nuevo);
+router.post('/nuevo', upload, nuevo);
 
-router.put('/modificar/:idTorneo', uploadSingle, modificar);
+router.put('/modificar/:idTorneo', upload, modificar);
 
 router.put('/cerrarInscripcion/:idTorneo', cerrarInscripcion);
 
