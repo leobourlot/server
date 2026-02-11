@@ -23,7 +23,7 @@ exports.cambiarImagenTorneo = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    const rutaImagenTorneo = path.join(__dirname, '..', 'archivos', 'imagenTorneo.png');
+    const rutaImagenTorneo = path.join(__dirname, 'archivos', 'imagenTorneo.png');
 
     try {
         if (fs.existsSync(rutaImagenTorneo)) {
@@ -75,7 +75,7 @@ exports.cambiarCalendario1 = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    const rutaImagenCalendario1 = path.join(__dirname, '..', 'archivos', 'calendario1.png');
+    const rutaImagenCalendario1 = path.join(__dirname, 'archivos', 'calendario1.png');
 
     try {
         if (fs.existsSync(rutaImagenCalendario1)) {
@@ -101,7 +101,7 @@ exports.cambiarCalendario2 = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    const rutaImagenCalendario2 = path.join(__dirname, '..', 'archivos', 'calendario2.png');
+    const rutaImagenCalendario2 = path.join(__dirname, 'archivos', 'calendario2.png');
 
     try {
         if (fs.existsSync(rutaImagenCalendario2)) {
@@ -127,7 +127,7 @@ exports.cambiarCalendario3 = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    const rutaImagenCalendario3 = path.join(__dirname, '..', 'archivos', 'calendario3.png');
+    const rutaImagenCalendario3 = path.join(__dirname, 'archivos', 'calendario3.png');
 
     try {
         if (fs.existsSync(rutaImagenCalendario3)) {
@@ -153,7 +153,7 @@ exports.cambiarRanking = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    const rutaImagenRanking = path.join(__dirname, '..', 'archivos', 'ranking.png');
+    const rutaImagenRanking = path.join(__dirname, 'archivos', 'ranking.png');
 
     try {
         if (fs.existsSync(rutaImagenRanking)) {
@@ -179,7 +179,7 @@ exports.cambiarRankingVertical = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ninguna imagen.' });
     }
 
-    const rutaImagenRankingVertical = path.join(__dirname, '..', 'archivos', 'rankingVertical.png');
+    const rutaImagenRankingVertical = path.join(__dirname, 'archivos', 'rankingVertical.png');
 
     try {
         if (fs.existsSync(rutaImagenRankingVertical)) {
@@ -207,7 +207,7 @@ exports.cambiarRankingPdf = (req, res) => {
         return res.status(400).json({ error: 'No se proporcionó ningun pdf.' });
     }
 
-    const rutaRankingPdf = path.join(__dirname, '..', 'archivos', 'rankingCompleto.pdf');
+    const rutaRankingPdf = path.join(__dirname, 'archivos', 'rankingCompleto.pdf');
 
     try {
         if (fs.existsSync(rutaRankingPdf)) {
@@ -233,7 +233,7 @@ exports.handleUploadNoticiaImagen = (req, res) => {
     if (!file) return res.status(400).json({ error: 'No llegó archivo.' });
 
     // Guarda en carpetas /archivos/imagenesNoticias
-    const destDir = path.join(__dirname, '..', 'archivos', 'imagenesNoticias');
+    const destDir = path.join(__dirname, 'archivos', 'imagenesNoticias');
     if (!fs.existsSync(destDir)) fs.mkdirSync(destDir, { recursive: true });
 
     const ext = path.extname(file.originalname);
