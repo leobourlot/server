@@ -2,22 +2,22 @@ const Router = require('express');
 
 // const {buscarPorId, buscarTodos, nuevo, modificar, eliminar} = require('../../controladores/torneo');
 
-const { upload, cambiarImagenTorneo, cambiarImagenTorneo2, cambiarCalendario1, cambiarCalendario2, cambiarCalendario3, cambiarRanking, cambiarRankingPdf, cambiarRankingVertical, handleUploadNoticiaImagen } = require('../../controladores/subirArchivo')
+const { uploadSingle, cambiarImagenTorneo, cambiarImagenTorneo2, cambiarCalendario1, cambiarCalendario2, cambiarCalendario3, cambiarRanking, cambiarRankingPdf, cambiarRankingVertical, handleUploadNoticiaImagen } = require('../../controladores/subirArchivo')
 const { uploadImagenesNoticias, cambiarImagenesNoticias } = require('../../controladores/subirImagenesNoticias');
 
 
 
 const router = Router();
 
-router.post('/proximoTorneo', upload, cambiarImagenTorneo);
-router.post('/proximoTorneo2', upload, cambiarImagenTorneo2);
-router.post('/calendario1', upload, cambiarCalendario1);
-router.post('/calendario2', upload, cambiarCalendario2);
-router.post('/calendario3', upload, cambiarCalendario3);
-router.post('/ranking', upload, cambiarRanking);
-router.post('/rankingVertical', upload, cambiarRankingVertical);
-router.post('/rankingPdf', upload, cambiarRankingPdf);
-router.post('/noticia/:index', upload, handleUploadNoticiaImagen);
+router.post('/proximoTorneo', uploadSingle, cambiarImagenTorneo);
+router.post('/proximoTorneo2', uploadSingle, cambiarImagenTorneo2);
+router.post('/calendario1', uploadSingle, cambiarCalendario1);
+router.post('/calendario2', uploadSingle, cambiarCalendario2);
+router.post('/calendario3', uploadSingle, cambiarCalendario3);
+router.post('/ranking', uploadSingle, cambiarRanking);
+router.post('/rankingVertical', uploadSingle, cambiarRankingVertical);
+router.post('/rankingPdf', uploadSingle, cambiarRankingPdf);
+router.post('/noticia/:index', uploadSingle, handleUploadNoticiaImagen);
 router.post('/imagenesNoticias', uploadImagenesNoticias, cambiarImagenesNoticias);
 
 // router.put('/modificar/:idTorneo', upload, modificar);
