@@ -51,7 +51,7 @@ function replaceFile(tempPath, finalName) {
    CONTROLADORES
    ========================= */
 
-exports.upload = upload.single('archivo');
+exports.upload = upload.single('foto');
 
 /**
  * Imagen Torneo
