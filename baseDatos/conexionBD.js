@@ -17,16 +17,27 @@ const mysql = require('mysql2/promise');
 //     keepAliveInitialDelay: 0
 // });
 
+// const conexion = mysql.createPool({
+//     host: 'srv1198.hstgr.io',
+//     // host: '127.0.0.1',
+//     user: 'u144219150_leonardo',
+//     database: 'u144219150_ajpp2',
+//     password: '2687Daisy',
+//     waitForConnections: true,
+//     connectionLimit: 10,
+//     queueLimit: 0,
+//     enableKeepAlive : true,  // <— esto ayuda a que no muera la conexión por inactividad
+//     keepAliveInitialDelay: 0
+// });
 const conexion = mysql.createPool({
-    host: 'srv1198.hstgr.io',
-    // host: '127.0.0.1',
-    user: 'u144219150_leonardo',
-    database: 'u144219150_ajpp2',
-    password: '2687Daisy',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASS,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    enableKeepAlive : true,  // <— esto ayuda a que no muera la conexión por inactividad
+    enableKeepAlive: true,
     keepAliveInitialDelay: 0
 });
 
