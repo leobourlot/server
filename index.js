@@ -139,8 +139,13 @@ app.use('/api/v1/jugadorTorneo', v1JugadorTorneo); //[passport.authenticate('jwt
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
-
+const io = new Server(server, {
+    cors: {
+        origin: allowedOrigins,
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
+});
 // Escucha conexiones desde el frontend
 io.on('connection', (socket) => {
     console.log('Frontend conectado');
