@@ -22,7 +22,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 const allowedOrigins = [
     'https://www.ajppargentina.com.ar',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://salmon-rhinoceros-987382.hostingersite.com/'
 ];
 
 // const corsOptions = {
