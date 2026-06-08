@@ -40,5 +40,5 @@ const conexion = mysql.createPool({
     enableKeepAlive: true,
     keepAliveInitialDelay: 0
 });
-
+console.log('Conectado a: ', process.env.DB_NAME)
 module.exports = conexion
